@@ -25,7 +25,7 @@ SECRET_KEY = ')k7^&4+0aa4(%^e1p6mc^k4_hcu4eawt4+ea$3*h#v!7-xceh5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['blooggapp.herokuapp.com']
 
 
 # Application definition
