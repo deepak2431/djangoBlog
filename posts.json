@@ -1,0 +1,23 @@
+[
+    {
+      "title": "My Updated Post",
+      "content": "My first updated post!\r\n\r\nThis is exciting!",
+      "user_id": 1
+    },
+    {
+      "title": "A Second Post",
+      "content": "This is a post from a different user...",
+      "user_id": 2
+    },
+    {
+      "title": "Top 5 Programming Lanaguages",
+      "content": "JavaScript, C, C++",
+      "user_id": 1
+    },
+    {
+      "title": "Sublime Text Tips and Tricks",
+      "content": "Selection. As a web developer, we would frequently do code editing, Sorting CSS, Command Palette",
+      "user_id": 1
+    }
+    
+  ]
