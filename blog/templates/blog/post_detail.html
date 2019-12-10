@@ -20,7 +20,8 @@
         <div id="comments" class="comments-area">
             <div id="respond" class="comment-respond">
               <h3 id="reply-title" class="comment-reply-title">Leave a Comment </h3>	
-              <form action="#" method="post" id="commentform" class="comment-form" novalidate="">
+              <form action="#" method="post" id="commentform" class="comment-form">
+                  {% csrf_token %}
                 <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span>
                 </p>
                 <p class="comment-form-comment">
@@ -31,16 +32,12 @@
                 <p class="comment-form-author">
                   <label for="author">Name <span class="required">*</span>
                   </label>
-                  <input id="author" name="author" type="text" value="" size="30" maxlength="245" aria-required="true" required="required">
+                  <input id="author" name="author" type="text" value="" size="30" maxlength="245" aria-required="true" required="required" >
                 </p>
                 <p class="comment-form-email">
                   <label for="email">Email <span class="required">*</span>
                   </label>
                   <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" aria-required="true" required="required">
-                </p>
-                <p class="comment-form-url">
-                  <label for="url">Website</label>
-                  <input id="url" name="url" type="url" value="" size="30" maxlength="200">
                 </p>
                 <div class="gglcptch gglcptch_v2">
                   <div id="gglcptch_recaptcha_112819276" class="gglcptch_recaptcha">

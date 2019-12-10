@@ -164,7 +164,6 @@ body {
   }
   input[type="text"],
   input[type="email"],
-  input[type="url"],
   textarea {
     color: #666666;
     border: 1px solid #eeeeee;
@@ -176,14 +175,12 @@ body {
   
   input[type="text"]:focus,
   input[type="email"]:focus,
-  input[type="url"]:focus,
   textarea:focus {
     color: #111111;
   }
   
   input[type="text"],
-  input[type="email"],
-  input[type="url"] {
+  input[type="email"] {
     padding: 3px;
   }
   
@@ -195,7 +192,7 @@ body {
     /* Improves readability and alignment in all browsers */
     width: 100%;
   }
-  [for="author"], .comment-form [for="email"], .comment-form [for="url"], .comment-form [for="comment"] {
+  [for="author"], .comment-form [for="email"], .comment-form [for="comment"] {
       float: left;
       padding: 10px 0;
       width: 100px;
