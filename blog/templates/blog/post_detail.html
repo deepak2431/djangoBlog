@@ -17,4 +17,59 @@
             <p class="article-content">{{ object.content }}</p>
           </div>
         </article>
+        <div id="comments" class="comments-area">
+            <div id="respond" class="comment-respond">
+              <h3 id="reply-title" class="comment-reply-title">Leave a Comment </h3>	
+              <form action="#" method="post" id="commentform" class="comment-form" novalidate="">
+                <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span>
+                </p>
+                <p class="comment-form-comment">
+                  <label for="comment">Comment :</label>
+                  <br>
+                  <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" aria-required="true" required="required"></textarea>
+                </p>
+                <p class="comment-form-author">
+                  <label for="author">Name <span class="required">*</span>
+                  </label>
+                  <input id="author" name="author" type="text" value="" size="30" maxlength="245" aria-required="true" required="required">
+                </p>
+                <p class="comment-form-email">
+                  <label for="email">Email <span class="required">*</span>
+                  </label>
+                  <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" aria-required="true" required="required">
+                </p>
+                <p class="comment-form-url">
+                  <label for="url">Website</label>
+                  <input id="url" name="url" type="url" value="" size="30" maxlength="200">
+                </p>
+                <div class="gglcptch gglcptch_v2">
+                  <div id="gglcptch_recaptcha_112819276" class="gglcptch_recaptcha">
+                    <div style="width: 304px; height: 78px;">
+                      <div>
+                        <iframe src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LcXDBITAAAAAHqJb363V0eCpUuuEgioxPHHy23j&amp;co=aHR0cHM6Ly9iZWF0cy5lY2tvdmF0aW9uLmNvbTo0NDM.&amp;hl=en&amp;v=PRkVene3wKrZUWATSylf69ja&amp;theme=light&amp;size=normal&amp;cb=whypbzih5mck" role="presentation" name="a-eggutta1vhj6" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" width="304" height="78" frameborder="0"></iframe>
+                      </div>
+                      <textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea>
+                    </div>
+                  </div>
+                  <noscript>
+                    <div style="width: 302px;">
+                      <div style="width: 302px; height: 422px; position: relative;">
+                        <div style="width: 302px; height: 422px; position: absolute;">
+                          <iframe src="https://www.google.com/recaptcha/api/fallback?k=6LcXDBITAAAAAHqJb363V0eCpUuuEgioxPHHy23j" frameborder="0" scrolling="no" style="width: 302px; height:422px; border-style: none;"></iframe>
+                        </div>
+                      </div>
+                      <div style="border-style: none; bottom: 12px; left: 25px; margin: 0px; padding: 0px; right: 25px; background: #f9f9f9; border: 1px solid #c1c1c1; border-radius: 3px; height: 60px; width: 300px;">
+                        <textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px !important; height: 40px !important; border: 1px solid #c1c1c1 !important; margin: 10px 25px !important; padding: 0px !important; resize: none !important;"></textarea>
+                      </div>
+                    </div>
+                  </noscript>
+                </div>
+                <br>
+                <p class="form-submit">
+                  <input name="submit" type="submit" id="submit" class="submit" value="Post Comment">
+                  <input type="hidden" name="comment_post_ID" value="2856" id="comment_post_ID">
+                </p>
+              </form>
+            </div>
+          </div>
 {% endblock content %}
