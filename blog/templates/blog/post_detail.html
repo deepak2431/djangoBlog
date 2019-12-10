@@ -14,7 +14,10 @@
               {% endif %}
             </div>
             <h2 class="article-title">{{ object.title }}</h2>
-            <p class="article-content">{{ object.content }}</p>
+            {%  if object.post_image %}
+              <img src="{{ object.post_image.url }}" style="width:300px; height:300px;">
+            {% endif %}
+              <p class="article-content">{{ object.content }}</p>
           </div>
         </article>
 {% endblock content %}

@@ -8,6 +8,8 @@ from django.views.generic import (
     UpdateView,
     DeleteView)
 from .models import Post
+import os
+from django.conf import settings
 
 def about(request):
     return render (request,'blog/about.html', {'title':'About'})
@@ -37,7 +39,7 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title','content']
+    fields = ['title','content','post_image']
     template_name = 'blog/post_form.html'
 
 
@@ -47,7 +49,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title','content']
+    fields = ['title','content','post_image']
     template_name = 'blog/post_form.html'
 
 
