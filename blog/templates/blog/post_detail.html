@@ -1,26 +1,46 @@
 {% extends "blog/base.html" %}
 {% block content %}
         <article class="media content-section">
-          <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+          <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
           <div class="media-body">
             <div class="article-metadata">
-              <a class="mr-2" href="#">{{ object.author }}</a>
-              <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
-              {% if object.author == user %}
+              <a class="mr-2" href="#">{{ post.author }}</a>
+              <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+              {% if post.author == user %}
                 <div>
-                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id%}">Update Post</a>
-                        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id%}">Delete Post</a>
+                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' post.id%}">Update Post</a>
+                        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' post.id%}">Delete Post</a>
                 </div>
               {% endif %}
             </div>
-            <h2 class="article-title">{{ object.title }}</h2>
-            <p class="article-content">{{ object.content }}</p>
+            <h2 class="article-title">{{ post.title }}</h2>
+            <p class="article-content">{{ post.content }}</p>
           </div>
         </article>
+        <h3>Leave a comment:</h3>
+
+      <form action="/post/{{ post.pk }}/" method="post">
+
+          {% csrf_token %}
+
+          {{ form.as_p }}
+          <input type='hidden' value='{{ post.pk }}' name='id'>
+          <button type="submit" class="btn btn-primary">Submit</button>
+
+      </form>
+        
+        
+        
+        
+        
+        
+        
+        
+        <!-- ------------------------------------------------------------------------------------------------------------------------- 
         <div id="comments" class="comments-area">
             <div id="respond" class="comment-respond">
               <h3 id="reply-title" class="comment-reply-title">Leave a Comment </h3>	
-              <form action="#" method="post" id="commentform" class="comment-form">
+              <form action="." method="post" id="commentform" class="comment-form">
                   {% csrf_token %}
                 <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span>
                 </p>
@@ -68,5 +88,22 @@
                 </p>
               </form>
             </div>
-          </div>
+          </div> -->
+        <div style="margin-left:20px;margin-top:20px">
+          <h4>Comments</h4>
+          {% for comment in post.comment_set.all %}
+          
+          <p>
+
+            On {{comment.created_on.date }}&nbsp;
+    
+            <b>{{ comment.Name }}</b> wrote:
+    
+        </p>
+    
+        <p>{{ comment.body }}</p>
+    
+        <hr>
+          {% endfor %}
+        </div>
 {% endblock content %}
