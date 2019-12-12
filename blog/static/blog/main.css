@@ -11,6 +11,7 @@ body {
   ul {
     margin: 0;
   }
+ 
   
   .bg-steel {
     background-color: #5f788a;
@@ -117,7 +118,7 @@ body {
     border-bottom: 1px solid #E7E7E7;
   }
   .comment-respond {
-    background-color: #f5f5f5;
+    background-color: #e7e6e1;
     padding: 40px;
     margin: 30px 0;
     max-width: 747px;
@@ -147,21 +148,9 @@ body {
     /* Improves appearance and consistency in all browsers */
   }
   
-  input[type="submit"]:hover {
-    background: #555;
-  }
+ 
   
-  input[type="submit"] {
-      border: none;
-      background: #fa5742;
-      color:#fff;
-      cursor: pointer;
-      -webkit-appearance: button;
-      
-      font-size: 15px;
-      line-height: 1;
-      padding: 10px 20px;
-  }
+  
   input[type="text"],
   input[type="email"],
   textarea {

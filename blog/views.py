@@ -1,6 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+import json
+import urllib
+from django.conf import settings
+from django.shortcuts import render, get_object_or_404,redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from django.contrib import messages
 from blog.forms import CommentForm
 from django.views.generic import (View,
     FormView,
@@ -9,7 +13,7 @@ from django.views.generic import (View,
     CreateView,
     UpdateView,
     DeleteView)
-from .models import Post
+from .models import Post,Comment
 
 def about(request):
     return render (request,'blog/about.html', {'title':'About'})
@@ -49,12 +53,30 @@ class PostDetailView(View):
     def post(self, request, *args, **kwargs):
         form = CommentForm(request.POST or None)
         if form.is_valid():
+            #Begin reCAPTCHA validation 
+            recaptcha_response = request.POST.get('g-recaptcha-response')
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            values = {
+                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+                'response': recaptcha_response
+            }
+            data = urllib.parse.urlencode(values).encode()
+            req =  urllib.request.Request(url, data=data)
+            response = urllib.request.urlopen(req)
+            result = json.loads(response.read().decode())
+            # End reCAPTCHA validation 
             post = get_object_or_404(Post, pk=kwargs['pk'])
-            post.comment_set.create(
+            if result['success']:
+                
+                post.comment_set.create(
                 Name = form.cleaned_data['Name'],
                 email = form.cleaned_data['email'],
                 body = form.cleaned_data['body']
             )
+                messages.success(request, 'New comment added with success!')
+            else:
+                messages.warning(request, 'Invalid reCAPTCHA. Please try again.')
+            
             form = CommentForm()
             context = {
             'post': post,
@@ -69,37 +91,7 @@ class PostDetailView(View):
         }          
         return render(request, 'blog/post_detail.html', context)
 
-    
 
-    
-
-
-# class CreateCommentView(View):
-
-#     def post(self, request, *args, **kwargs):
-#         form = CommentForm(request.POST or None)
-#         form = CommentForm()
-#         if form.is_valid():
-#             form = CommentForm()
-#             return render(request, 'blog/post_detail.html',{'form': form})
-#         form = CommentForm()
-#         post = get_object_or_404(Post, pk=kwargs['pk'])   
-#         context = {
-#             'post': post,
-#             'form': form
-#         }          
-#         return render(request, 'blog/post_detail.html', context)
-
-
-
-# This is the comment view
-# class CommentView(View):
-#     def get(self, request, *args, **kwargs):
-#         form = CommentForm()
-#         context = {'form': form}
-#         return render(request, 'contact-us.html', context)
-
-    
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post

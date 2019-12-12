@@ -29,6 +29,7 @@ SECRET_KEY = "9039d2a5652f9e9e298a9f0384479b93927e1d68a3d6d576"
 DEBUG = True
 ALLOWED_HOSTS = ['blooggapp.herokuapp.com']
 APPEND_SLASH=False
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LdOaMcUAAAAAATui_mS6_4N7qy2eKC8LJTTdHf5'
 
 # Application definition
 
