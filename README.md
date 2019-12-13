@@ -36,4 +36,9 @@ Follow the given link to make a successful and valid PR: https://help.github.com
 1. Make PR title in this format: `Fixes #IssueNo : Name of Issue`
 
 For any doubts related to the issues, i.e., to understand the issue better etc, comment down your queries on the respective issue.
-"hello man"
+
+
+**License**
+
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/deepak2431/djangoBlog/blob/master/License.md) file for details
+
