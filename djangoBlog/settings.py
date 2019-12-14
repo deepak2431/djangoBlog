@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,14 +26,6 @@ SECRET_KEY = "9039d2a5652f9e9e298a9f0384479b93927e1d68a3d6d576"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-<<<<<<< HEAD
-ALLOWED_HOSTS = ['blooggapp.herokuapp.com']
-
-=======
-ALLOWED_HOSTS = ['blooggapp.herokuapp.com']
-APPEND_SLASH=False
-GOOGLE_RECAPTCHA_SECRET_KEY = '6LdOaMcUAAAAAATui_mS6_4N7qy2eKC8LJTTdHf5'
->>>>>>> 82b328c7172133106b1ec2257fa2e9f29a274fee
 
 # Application definition
 
@@ -141,4 +132,3 @@ LOGIN_REDIRECT_URL = 'blog-home'
 
 LOGIN_URL = 'login'
 
-django_heroku.settings(locals())
