@@ -17,6 +17,8 @@
     {% else %}
         <title> Blog</title>
     {% endif %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>
 <body>
     <header class="site-header">
@@ -49,9 +51,10 @@
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8">
+          
           {% if messages %}
             {% for message in messages %}
-              <div class="alert alert-{{ message.tags }}">
+            <div class="alert alert-{{ message.tags }}">
                 {{ message }}
               </div>
             {% endfor %}
