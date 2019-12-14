@@ -20,13 +20,12 @@
         </article>
         
         
-        <div id="comments" class="comments-area" >
+        
             <div id="respond" class="comment-respond">
               <h3 id="reply-title" class="comment-reply-title">Leave a Comment </h3>	
               <form action="/post/{{ post.pk }}/" method="post" id="commentform" class="comment-form">
                   {% csrf_token %}
-                <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span>
-                </p>
+                <p class="comment-notes">Your email address will not be published. </p>
                 <p class="comment-form-comment">
                   <label for="comment">Comment :</label>
                   <br>
@@ -45,8 +44,7 @@
                   {{ form.email }}
                   
                 </p>
-                <div class="g-recaptcha" data-sitekey="6LdOaMcUAAAAAEls_hjRziGFQtGa60Qj7tK_1UL9"></div>
-                <br/>
+                
 
                 
               
@@ -56,7 +54,7 @@
                 </p>
               </form>
             </div>
-          </div>
+        
         
         
         

@@ -87,7 +87,7 @@ body {
     clear: both;
     font-family: "Roboto Condensed", sans-serif;
     font-weight: 700;
-    margin: 1em 0;
+    margin: 0.5em 0;
   }
   
   button,
@@ -104,8 +104,8 @@ body {
   
   
   .comments-area {
-    max-width: 747px;
-    margin: 40px 0;
+    max-width: 500px;
+    margin: 30px 0;
   }
   .comments-title {
     margin: 20px 0;
@@ -119,9 +119,9 @@ body {
   }
   .comment-respond {
     background-color: #e7e6e1;
-    padding: 40px;
-    margin: 30px 0;
-    max-width: 747px;
+    padding: 15px 30px 15px 30px;
+    margin: 20px 0;
+    max-width: 500px;
   }
   
   .comment .comment-respond {
