@@ -1,6 +1,7 @@
 body {
     background: #fafafa;
     color: #333333;
+    background-image: linear-gradient(-90deg, rgb(51, 153, 255), rgb(128, 255, 223));
     margin-top: 5rem;
   }
   
@@ -14,7 +15,7 @@ body {
  
   
   .bg-steel {
-    background-color: #5f788a;
+    background-color: rgb(0, 128, 128);
   }
   
   .site-header .navbar-nav .nav-link {
@@ -30,7 +31,7 @@ body {
   }
   
   .content-section {
-    background: #ffffff;
+    background-image: linear-gradient(-90deg, rgb(0, 128, 128) , rgb(0, 128, 128));
     padding: 10px 20px;
     border: 1px solid #dddddd;
     border-radius: 3px;
@@ -186,3 +187,27 @@ body {
       padding: 10px 0;
       width: 100px;
   }
+
+.navbar-brand{
+  float : left;
+ }
+
+ #grad1 {
+  height: 55px;
+  background-color: red; /* For browsers that do not support gradients */
+  background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); /* Standard syntax (must be last) */
+}
+
+html, body{ height:100%; margin:0; }
+header{ height:50px; background:lightcyan; }
+footer{ height:50px; background:PapayaWhip; background-color: rgb(0, 128, 128);}
+
+/* Trick */
+body{ 
+  display:flex; 
+  flex-direction:column; 
+}
+
+footer{
+  margin-top:auto; 
+} 
