@@ -1,13 +1,19 @@
-from django.shortcuts import render, get_object_or_404
+import json
+import urllib
+from django.conf import settings
+from django.shortcuts import render, get_object_or_404,redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
-from django.views.generic import (
+from django.contrib import messages
+from blog.forms import CommentForm
+from django.views.generic import (View,
+    FormView,
     ListView, 
     DetailView,
     CreateView,
     UpdateView,
     DeleteView)
-from .models import Post
+from .models import Post,Comment
 
 def about(request):
     return render (request,'blog/about.html', {'title':'About'})
@@ -31,9 +37,61 @@ class UserPostListView(ListView):
         return Post.objects.filter(author=user).order_by('-date_posted')
 
 
-class PostDetailView(DetailView):
-    model = Post
-    template_name = 'blog/post_detail.html'
+class PostDetailView(View):
+
+    # when clicked on the title of post get function is trigeered 
+    def get(self, request, *args, **kwargs):
+        post = get_object_or_404(Post, pk=kwargs['pk'])
+        form = CommentForm()
+        context = {
+            'post': post,
+            'form': form
+        }
+        return render(request, 'blog/post_detail.html', context)
+    
+    # when commented post request is forwarded on this view and post function is triggered
+    def post(self, request, *args, **kwargs):
+        form = CommentForm(request.POST or None)
+        if form.is_valid():
+            #Begin reCAPTCHA validation 
+            recaptcha_response = request.POST.get('g-recaptcha-response')
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            values = {
+                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+                'response': recaptcha_response
+            }
+            data = urllib.parse.urlencode(values).encode()
+            req =  urllib.request.Request(url, data=data)
+            response = urllib.request.urlopen(req)
+            result = json.loads(response.read().decode())
+            # End reCAPTCHA validation 
+            post = get_object_or_404(Post, pk=kwargs['pk'])
+            if result['success']:
+                
+                post.comment_set.create(
+                Name = form.cleaned_data['Name'],
+                email = form.cleaned_data['email'],
+                body = form.cleaned_data['body']
+            )
+                messages.success(request, 'New comment added with success!')
+            else:
+                messages.warning(request, 'Invalid reCAPTCHA. Please try again.')
+            
+            form = CommentForm()
+            context = {
+            'post': post,
+            'form': form,
+        }          
+            return render(request, 'blog/post_detail.html',context)
+        form = CommentForm()
+        post = get_object_or_404(Post, pk=kwargs['pk'])   
+        context = {
+            'post': post,
+            'form': form
+        }          
+        return render(request, 'blog/post_detail.html', context)
+
+
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
