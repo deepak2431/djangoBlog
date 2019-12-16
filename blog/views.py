@@ -53,30 +53,16 @@ class PostDetailView(View):
     def post(self, request, *args, **kwargs):
         form = CommentForm(request.POST or None)
         if form.is_valid():
-            #Begin reCAPTCHA validation 
-            recaptcha_response = request.POST.get('g-recaptcha-response')
-            url = 'https://www.google.com/recaptcha/api/siteverify'
-            values = {
-                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
-                'response': recaptcha_response
-            }
-            data = urllib.parse.urlencode(values).encode()
-            req =  urllib.request.Request(url, data=data)
-            response = urllib.request.urlopen(req)
-            result = json.loads(response.read().decode())
-            # End reCAPTCHA validation 
+            
             post = get_object_or_404(Post, pk=kwargs['pk'])
-            if result['success']:
+            
                 
-                post.comment_set.create(
+            post.comment_set.create(
                 Name = form.cleaned_data['Name'],
                 email = form.cleaned_data['email'],
                 body = form.cleaned_data['body']
             )
-                messages.success(request, 'New comment added with success!')
-            else:
-                messages.warning(request, 'Invalid reCAPTCHA. Please try again.')
-            
+               
             form = CommentForm()
             context = {
             'post': post,
