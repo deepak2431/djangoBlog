@@ -30,7 +30,6 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
-    'blog'
     'blog.apps.BlogConfig',
     'user.apps.UserConfig',
     'crispy_forms',
