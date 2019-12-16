@@ -1,6 +1,7 @@
 body {
     background: #fafafa;
     color: #333333;
+    background-image: linear-gradient(-90deg, rgb(51, 153, 255), rgb(128, 255, 223));
     margin-top: 5rem;
   }
   
@@ -8,15 +9,32 @@ body {
     color: #444444;
   }
   
-  ul {
+  ul ,label , form ,small , input , select , table , div , tr , textarea {
     margin: 0;
   }
  
-  
   .bg-steel {
-    background-color: #5f788a;
+    background-image: linear-gradient(-90deg, rgb(0, 128, 128) , rgb(0, 128, 128));
   }
   
+  .btn2{
+    color: black;
+  }
+
+.invalid-feedback {
+      display: block;
+      color: black ;
+    }
+
+  .helptext{
+  color: black ;
+}
+
+.custom-select.is-invalid~.invalid-feedback, .custom-select.is-invalid~.invalid-tooltip, .form-control.is-invalid~.invalid-feedback, .form-control.is-invalid~.invalid-tooltip, .was-validated .custom-select:invalid~.invalid-feedback, .was-validated .custom-select:invalid~.invalid-tooltip, .was-validated .form-control:invalid~.invalid-feedback, .was-validated .form-control:invalid~.invalid-tooltip {
+    display: block;
+    color: black ;
+}
+
   .site-header .navbar-nav .nav-link {
     color: #cbd5db;
   }
@@ -30,7 +48,7 @@ body {
   }
   
   .content-section {
-    background: #ffffff;
+    background-image: linear-gradient(-90deg, rgb(0, 230, 172) ,rgb(128, 255, 128));
     padding: 10px 20px;
     border: 1px solid #dddddd;
     border-radius: 3px;
@@ -48,6 +66,7 @@ body {
   
   .article-content {
     white-space: pre-line;
+    color: black ;
   }
   
   .article-img {
@@ -59,7 +78,7 @@ body {
   .article-metadata {
     padding-bottom: 1px;
     margin-bottom: 4px;
-    border-bottom: 1px solid #e3e3e3
+    border-bottom: 1px solid #e3e3e3;
   }
   
   .article-metadata a:hover {
@@ -97,12 +116,12 @@ body {
     color: #404040;
     font-family: "Source Sans Pro", sans-serif;
     font-size: 16px;
-    
     line-height: 1.5;
   }
   
-  
-  
+  .crispyform {
+    color: black ;
+  }
   .comments-area {
     max-width: 747px;
     margin: 40px 0;
@@ -186,3 +205,16 @@ body {
       padding: 10px 0;
       width: 100px;
   }
+html, body{ height:100%; margin:0; }
+header{ height:50px; background:lightcyan; }
+footer{ height:50px; background:PapayaWhip; background-color: rgb(0, 128, 128);}
+
+/* Trick */
+body{ 
+  display:flex; 
+  flex-direction:column; 
+}
+
+footer{
+  margin-top:auto; 
+}
