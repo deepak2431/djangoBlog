@@ -9,6 +9,7 @@
               <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
             </div>
             <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+            <h5>Topic : {{post.topic}}</h5>
             <p class="article-content">{{ post.content }}</p>
           </div>
         </article>
