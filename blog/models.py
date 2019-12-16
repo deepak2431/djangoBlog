@@ -14,6 +14,7 @@ class Post(models.Model):
         
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk':self.pk})
+
 class Comment(models.Model):
 
     Name = models.CharField(max_length=60)
@@ -24,6 +25,12 @@ class Comment(models.Model):
 
     # def get_absolute_url(self):
     #     return reverse('post-detail', kwargs={'pk': Post.pk})
+
+
+
+class Images(models.Model):
+    post = models.ForeignKey(Post, default=None, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='post_images/',verbose_name='Image')
 
 
 

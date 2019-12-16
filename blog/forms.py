@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment
+from .models import Comment, Post, Images
 
 class CommentForm(forms.Form):
     
@@ -29,3 +29,19 @@ class CommentForm(forms.Form):
             "rows" : "5"
         })
     )
+
+class PostForm(forms.ModelForm):
+    title = forms.CharField(max_length=100)
+    content = forms.CharField(widget=forms.Textarea)
+
+    class Meta:
+        model = Post
+        fields = ('title', 'content')    
+
+
+
+class ImageForm(forms.ModelForm):
+    image = forms.ImageField(label='Image')    
+    class Meta:
+        model = Images
+        fields = ('image', )
