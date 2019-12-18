@@ -20,6 +20,7 @@ class Comment(models.Model):
     body = models.TextField()
     email = models.EmailField(max_length = 50,default="")
     created_on = models.DateTimeField(auto_now_add=True)
+    reply = models.ForeignKey('self',on_delete=models.CASCADE,null =True,related_name = 'replies')
     post = models.ForeignKey('Post', on_delete=models.CASCADE)
 
     # def get_absolute_url(self):

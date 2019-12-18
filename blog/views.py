@@ -43,9 +43,11 @@ class PostDetailView(View):
     def get(self, request, *args, **kwargs):
         post = get_object_or_404(Post, pk=kwargs['pk'])
         form = CommentForm()
+        comments = Comment.objects.filter(post = post,reply = None).order_by('-id')
         context = {
             'post': post,
-            'form': form
+            'form': form,
+            'comments' : comments
         }
         return render(request, 'blog/post_detail.html', context)
     
@@ -55,25 +57,34 @@ class PostDetailView(View):
         if form.is_valid():
             
             post = get_object_or_404(Post, pk=kwargs['pk'])
-            
+            reply_id = request.POST.get('comment_id')
+            comment_parent = None
+            if reply_id:
+                comment_parent = Comment.objects.get(id=reply_id)
                 
             post.comment_set.create(
                 Name = form.cleaned_data['Name'],
                 email = form.cleaned_data['email'],
-                body = form.cleaned_data['body']
+                body = form.cleaned_data['body'],
+                reply = comment_parent
             )
-               
+            messages.success(request, 'Comment successful')   
             form = CommentForm()
+            comments = Comment.objects.filter(post = post,reply = None).order_by('-id')
             context = {
             'post': post,
             'form': form,
+            'comments' : comments
         }          
             return render(request, 'blog/post_detail.html',context)
         form = CommentForm()
         post = get_object_or_404(Post, pk=kwargs['pk'])   
+        messages.warning(request, 'Some error occured')
+        comments = Comment.objects.filter(post = post,reply = None).order_by('-id')
         context = {
             'post': post,
-            'form': form
+            'form': form,
+            'comments' : comments
         }          
         return render(request, 'blog/post_detail.html', context)
 
