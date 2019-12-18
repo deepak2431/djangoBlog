@@ -1,7 +1,6 @@
 from django import forms
 from .models import Comment, Post, Images
 
-
 class CommentForm(forms.Form):
     
     Name = forms.CharField(
