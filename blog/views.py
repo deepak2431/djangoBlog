@@ -52,7 +52,7 @@ class PostDetailView(View):
         context = {
             'post': post,
             'form': form,
-            'comments' : comments
+            'comments' : comments,
             'images': images
         }
         return render(request, 'blog/post_detail.html', context)
@@ -98,7 +98,7 @@ class PostDetailView(View):
         context = {
             'post': post,
             'images': images,
-            'form': form
+            'form': form,
             'comments' : comments
         }          
         return render(request, 'blog/post_detail.html', context)
