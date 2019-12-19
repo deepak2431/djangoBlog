@@ -79,8 +79,11 @@
             </div>
             
              <div style ="float: right; "> 
-              <button type="button"  name="button" class="reply-btn btn btn-outline-dark btn-sm ml-2">Reply</button>
+              <button type="button"  name="button" class="add-reply-btn btn btn-outline-dark btn-sm ml-2">Add Reply</button>
              </div> 
+             <div style ="float: right; "> 
+              <button type="button"  name="button" class="reply-btn btn btn-outline-dark btn-sm ml-2">Replies</button>
+             </div>
              <hr>
             
             
@@ -107,39 +110,44 @@
                 <hr>
 
                 {% endfor %}
-                <div id="respond" class="comment-respond">
-                  <h3 id="reply-title" class="comment-reply-title">Leave a Comment </h3>	
-                  <form action="/post/{{ post.pk }}/" method="post" id="commentform" class="comment-form">
-                      {% csrf_token %}
-                    <p class="comment-notes">Your email address will not be published. </p>
-                    <p class="comment-form-comment">
-                      <label for="comment">Comment :</label>
-                      <br>
-                      {{ form.body }}
-                      
-                    </p>
-                    <p class="comment-form-author">
-                      <label for="author">Name <span class="required">*</span>
-                      </label>
-                      {{ form.Name }}
-                     
-                    </p>
-                    <p class="comment-form-email">
-                      <label for="email">Email <span class="required">*</span>
-                      </label>
-                      {{ form.email }}
-                      
-                    </p>
-                    <p class="form-submit">
-                      <input type="hidden" name="comment_id" value="{{ comment.id }}">
-                      <button type="submit" class="btn btn-primary">Submit</button>
-                    </p>
-                  </form>
-                </div>
+                
                 
               </div>
             </div>
-            
+
+          <div class="reply-form" style="display: none;">
+            <div style="margin-left: 3em;">
+              <div id="respond" class="comment-respond" >
+              <h3 id="reply-title" class="comment-reply-title">Leave a Comment </h3>	
+              <form action="/post/{{ post.pk }}/" method="post" id="commentform" class="comment-form">
+                  {% csrf_token %}
+                <p class="comment-notes">Your email address will not be published. </p>
+                <p class="comment-form-comment">
+                  <label for="comment">Comment :</label>
+                  <br>
+                  {{ form.body }}
+                  
+                </p>
+                <p class="comment-form-author">
+                  <label for="author">Name <span class="required">*</span>
+                  </label>
+                  {{ form.Name }}
+                 
+                </p>
+                <p class="comment-form-email">
+                  <label for="email">Email <span class="required">*</span>
+                  </label>
+                  {{ form.email }}
+                  
+                </p>
+                <p class="form-submit">
+                  <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </p>
+              </form>
+            </div>
+            </div>
+        </div>
            <br>
           {% endfor %}
          
