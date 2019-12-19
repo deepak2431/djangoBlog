@@ -85,12 +85,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script > 
       $('.reply-btn').click(function(){
-        $(this).parent().next().next('.replied-comments').fadeToggle()
+        $(this).parent().next().next().next('.replied-comments').fadeToggle()
       });
     </script>
     <script > 
       $('.add-reply-btn').click(function(){
-        $(this).parent().next().next().next().next('.reply-form').fadeToggle()
+        $(this).parent().next().next().next('.reply-form').fadeToggle()
       });
     </script>
 

@@ -78,12 +78,15 @@
               
             </div>
             
-             <div style ="float: right; "> 
-              <button type="button"  name="button" class="add-reply-btn btn btn-outline-dark btn-sm ml-2">Add Reply</button>
-             </div> 
+             
+             {% if comment.replies.all %}
              <div style ="float: right; "> 
               <button type="button"  name="button" class="reply-btn btn btn-outline-dark btn-sm ml-2">Replies</button>
              </div>
+             {% endif %}
+             <div style ="float: right; "> 
+              <button type="button"  name="button" class="add-reply-btn btn btn-outline-dark btn-sm ml-2">Add Reply</button>
+             </div> 
              <hr>
             
             
