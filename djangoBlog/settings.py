@@ -30,6 +30,7 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
+    'tinymce',
     'blog.apps.BlogConfig',
     'user.apps.UserConfig',
     'crispy_forms',

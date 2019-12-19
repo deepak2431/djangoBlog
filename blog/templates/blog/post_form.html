@@ -1,6 +1,9 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+    <style>
+    .tox-notification {display: none !important;}
+    </style>
     <div class="content-section">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
