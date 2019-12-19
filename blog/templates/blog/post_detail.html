@@ -47,10 +47,6 @@
                   {{ form.email }}
                   
                 </p>
-                
-
-                
-              
                 <p class="form-submit">
                  
                   <button type="submit" class="btn btn-primary">Submit</button>
@@ -62,7 +58,7 @@
         
         
           <h4>Comments</h4>
-          {% for comment in post.comment_set.all %}
+          {% for comment in comments %}
           <div  class="border rounded p-3 mb-1" style="background-color: #f6f5f1;">
               <div class="container">
                 <div class="row">
@@ -77,10 +73,85 @@
               </div>
               <div class="my-3">
                 <p>{{ comment.body }}</p>
+                 
+              </div>
+              
+            </div>
+            
+             
+             {% if comment.replies.all %}
+             <div style ="float: right; "> 
+              <button type="button"  name="button" class="reply-btn btn btn-outline-dark btn-sm ml-2">Replies</button>
+             </div>
+             {% endif %}
+             <div style ="float: right; "> 
+              <button type="button"  name="button" class="add-reply-btn btn btn-outline-dark btn-sm ml-2">Add Reply</button>
+             </div> 
+             <hr>
+            
+            
+             <div class="replied-comments" style="display: none;"> 
+              <div style="margin-left: 3em;">  
+                
+                {% for reply in comment.replies.all %}
+                <div  class="border rounded p-3 mb-1" style="background-color: #f6f5f1;">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-2 col-md-1 p-0 align-self-center">
+                        <img class="align-self-center rounded-circle img-fluid w-100" src="https://www.gravatar.com/avatar/9a07a6b85d87764d65c3af0e37accbbb?s=500&amp;d=mp">
+                      </div>
+                      <div class="col pr-0 d-flex align-items-center">
+                        <p><strong>{{ reply.Name }}</strong><span class="text-muted"> on <a class="text-muted" href="#comment-cc6bd7a0-6680-4b5d-8f99-8a19ffbcafe3">{{ comment.created_on }}</a></span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="my-3">
+                    <p>{{ reply.body }}</p>
+                  </div>
+                </div>
+                <hr>
+
+                {% endfor %}
+                
+                
               </div>
             </div>
-            <hr>
-         
+
+          <div class="reply-form" style="display: none;">
+            <div style="margin-left: 3em;">
+              <div id="respond" class="comment-respond" >
+              <h3 id="reply-title" class="comment-reply-title">Leave a Comment </h3>	
+              <form action="/post/{{ post.pk }}/" method="post" id="commentform" class="comment-form">
+                  {% csrf_token %}
+                <p class="comment-notes">Your email address will not be published. </p>
+                <p class="comment-form-comment">
+                  <label for="comment">Comment :</label>
+                  <br>
+                  {{ form.body }}
+                  
+                </p>
+                <p class="comment-form-author">
+                  <label for="author">Name <span class="required">*</span>
+                  </label>
+                  {{ form.Name }}
+                 
+                </p>
+                <p class="comment-form-email">
+                  <label for="email">Email <span class="required">*</span>
+                  </label>
+                  {{ form.email }}
+                  
+                </p>
+                <p class="form-submit">
+                  <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </p>
+              </form>
+            </div>
+            </div>
+        </div>
+           <br>
           {% endfor %}
          
 {% endblock content %}
