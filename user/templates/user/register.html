@@ -4,7 +4,7 @@
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
-            <fieldset class="form-group">
+            <fieldset class="form-group crispyform">
                 <legend class="border-bottom mb-4">Join Today</legend>
                 {{ form|crispy }}
                 <label for="Profession"><p1>Profession*</p1></label><br/>
@@ -262,7 +262,7 @@
                 </select>                  
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                <button class="btn btn-outline-info btn2" type="submit">Sign Up</button>
             </div>
         </form>
         <div class="border-top pt-3">
