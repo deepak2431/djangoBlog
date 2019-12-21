@@ -4,6 +4,9 @@ body {
     background-image: linear-gradient(-90deg, rgb(51, 153, 255), rgb(128, 255, 223));
     margin-top: 5rem;
   }
+  .pt-6, .py-5 {
+    padding-top: 6rem !important;
+}
   
   h1, h2, h3, h4, h5, h6 {
     color: #444444;
@@ -217,4 +220,36 @@ body{
 
 footer{
   margin-top:auto; 
+}
+
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #00B4CC;
+  border-right: none;
+  padding: 5px;
+  height: 36px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus{
+  color: #00B4CC;
+}
+
+
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
