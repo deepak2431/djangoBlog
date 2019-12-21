@@ -1,5 +1,11 @@
 {% extends "blog/base.html" %}
 {% block content %}
+{% if posts|length == 0 %}
+  <div class="alert alert-warning alert-dih4sh4missible fade show" role="alert">
+    <h4><strong>SORRY, We were unable to get something related.</strong> </h4>
+    
+  </div>
+{% else %}
     {% for post in posts %}
         <article class="media content-section">
           <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
@@ -35,4 +41,5 @@
       {% endif %}
 
     {% endif %}
+{% endif %}    
 {% endblock content %}
