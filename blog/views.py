@@ -1,5 +1,6 @@
 import json
 import urllib
+from django.db.models import Q
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404,redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -26,8 +27,15 @@ class PostListView(ListView):
     model = Post
     template_name = 'blog/home.html'
     context_object_name = 'posts'
-    ordering = ['-date_posted']
     paginate_by = 5
+
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        if query:
+            return Post.objects.filter(Q(title__icontains = query) | Q(topic__icontains = query)).order_by('-date_posted')
+        else:
+            return Post.objects.order_by('-date_posted') 
+         
 
 class UserPostListView(ListView):
     model = Post
