@@ -2,12 +2,13 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from tinymce.models import HTMLField
 
 class Post(models.Model):
     TOPICS = [('TECHNOLOGY','Technology'),('CULTURE','Culture'),('ENTERTAINMENT','Entertainment'),('MUSIC','Music'),('DANCE','Dance'),('NONE','None')]
     title = models.CharField(max_length=100)
     topic = models.CharField(max_length=50,blank = False,default=('NONE','None'),choices=TOPICS)
-    content = models.TextField()
+    content = HTMLField()
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
