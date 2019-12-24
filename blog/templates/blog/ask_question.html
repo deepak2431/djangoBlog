@@ -5,15 +5,15 @@
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Blog Post</legend>
-                {{ postForm|crispy }}
+                <legend class="border-bottom mb-4">New Question</legend>
+                {{ quesForm|crispy }}
             </fieldset>
-            {{ formset.management_form }}
+            {% comment %} {{ formset.management_form }}
             {% for form in formset %}
             {{ form|crispy }}
-            {% endfor %}
+            {% endfor %} {% endcomment %}
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Post</button>
+                <button class="btn btn-outline-info" type="submit">Ask</button>
             </div>
         </form>
     </div>

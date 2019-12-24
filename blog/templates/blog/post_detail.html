@@ -9,16 +9,37 @@
               <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
               {% if post.author == user %}
                 <div>
-                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' post.id%}">Update Post</a>
-                        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' post.id%}">Delete Post</a>
+                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' post.id%}">
+                          {%if post.isQuestion%}
+                            Update Question
+                          {%else%}
+                            Update Post
+                          {%endif%}
+                        </a>
+                        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' post.id%}">
+                          {%if post.isQuestion%}
+                            Delete Question
+                          {%else%}
+                            Delete Post
+                          {%endif%}                        
+                        </a>
                 </div>
               {% endif %}
             </div>
             <h2 class="article-title">{{ post.title }}</h2>
+            <h5>Topic : {{post.topic}}</h5>
+            {%if post.isQuestion%}
+              <b>Question:</b>
+            {%endif%}
             {% for i in images %}
             <img src={{i.image.url}} style="width:500px; height: 300px;">
             {%endfor%}
             <p class="article-content">{{ post.content }}</p>
+            {%if post.isQuestion%}
+              <div class="d-flex flex-row-reverse">
+                <a class="mr-2" href="{% url 'blog-home'%}" >Answer</a>
+              </div>
+            {%endif%}            
           </div>
         </article>
         

@@ -16,7 +16,15 @@
             </div>
             <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
             <h5>Topic : {{post.topic}}</h5>
+            {%if post.isQuestion%}
+              <b>Question:</b>
+            {%endif%}
             <p class="article-content">{{ post.content }}</p>
+            {%if post.isQuestion%}
+              <div class="d-flex flex-row-reverse">
+                <a class="mr-2" href="{% url 'answers-list' post.id%}" >Answer</a>
+              </div>
+            {%endif%}
           </div>
         </article>
     {% endfor %}
