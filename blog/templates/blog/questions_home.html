@@ -1,6 +1,11 @@
 {% extends "blog/base.html" %}
 {% block content %}
-    <h1 class="mb-3">Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
+{% if posts|length == 0 %}
+  <div class="alert alert-warning alert-dih4sh4missible fade show" role="alert">
+    <h4><strong>SORRY, We were unable to get something related.</strong> </h4>
+    
+  </div>
+{% else %}
     {% for post in posts %}
         <article class="media content-section">
           <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
@@ -9,11 +14,7 @@
               <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
               <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
             </div>
-            {% if post.isQuestion and post.author != user %}
-            <h2>{{post.title}}</h2>
-            {% else %}
             <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-            {% endif %}
             <h5>Topic : {{post.topic}}</h5>
             {%if post.isQuestion%}
               <b>Question:</b>
@@ -21,9 +22,9 @@
             <p class="article-content">{{ post.content }}</p>
             {%if post.isQuestion%}
               <div class="d-flex flex-row-reverse">
-                <a class="mr-2" href="{% url 'blog-home'%}" >Answer</a>
+                <a class="mr-2" href="{% url 'answers-list' post.id%}" >Answer</a>
               </div>
-            {%endif%}            
+            {%endif%}
           </div>
         </article>
     {% endfor %}
@@ -48,4 +49,5 @@
       {% endif %}
 
     {% endif %}
+{% endif %}    
 {% endblock content %}

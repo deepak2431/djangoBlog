@@ -43,7 +43,7 @@
                  </div>
                 </form>
                 {% if user.is_authenticated %}
-                  <a class="nav-item nav-link" href="{% url 'question-ask' %}">Ask Question</a>
+                  <a class="nav-item nav-link" href="{% url 'question-home' %}">Question Form</a>
                   <a class="nav-item nav-link" href="{% url 'post-create' %}">Create Post</a>
                   <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
                   <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>

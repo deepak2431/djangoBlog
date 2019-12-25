@@ -28,14 +28,23 @@ class PostListView(ListView):
     template_name = 'blog/home.html'
     context_object_name = 'posts'
     paginate_by = 5
-
     def get_queryset(self):
+        if(self.kwargs.get('url') == 'question_form'):
+            post_set = Post.objects.filter(isQuestion = True)
+        elif(self.kwargs.get('url') == None):
+            post_set = Post.objects.filter(isQuestion = False)
         query = self.request.GET.get('query')
         if query:
-            return Post.objects.filter(Q(title__icontains = query) | Q(topic__icontains = query)).order_by('-date_posted')
+            return post_set.filter(Q(title__icontains = query) | Q(topic__icontains = query)).order_by('-date_posted')
         else:
-            return Post.objects.order_by('-date_posted') 
-         
+            return post_set.order_by('-date_posted')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Q_Form'] = False
+        if(self.kwargs.get('url') == 'question_form'):
+            context['Q_Form'] = True
+        return context         
 
 class UserPostListView(ListView):
     model = Post
@@ -145,7 +154,7 @@ def askQuestion(request):
         questionForm = QuestionForm()
         formset = ImageFormSet(queryset=Images.objects.none())
     
-    context = {'postForm': questionForm, 'formset': formset}
+    context = {'postForm': questionForm, 'formset': formset, 'Q_Form':True}
     return render(request, 'blog/post_form.html', context)
 
 
@@ -270,7 +279,7 @@ class AnswersListView(ListView):
                 'answers' : Answer.objects.filter(question=question).order_by('-date_posted'),
                 'question' : question,
                 'images' :images,
-                'answer_form':form
+                'answer_form':AnswerForm()
             }
             return render(request,self.template_name,context)
         form = AnswerForm()

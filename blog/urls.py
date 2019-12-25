@@ -8,6 +8,7 @@ from .import views
 
 urlpatterns = [
     path('', PostListView.as_view(), name='blog-home'),
+    path('questions/form/', PostListView.as_view(), name='question-home', kwargs={'url':'question_form'}),
     path('user/<str:username>/', UserPostListView.as_view(), name='user-posts'),
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     #  path('post/<int:pk>/comment',CreateCommentView.as_view(), name='create-comment'),

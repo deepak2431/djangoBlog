@@ -42,8 +42,8 @@
             {%endif%}            
           </div>
         </article>
-        
-        
+        {% if post.isQuestion %}
+        {% else %}
         
             <div id="respond" class="comment-respond">
               <h3 id="reply-title" class="comment-reply-title">Leave a Comment </h3>	
@@ -174,5 +174,6 @@
         </div>
            <br>
           {% endfor %}
+    {% endif %}
          
 {% endblock content %}
