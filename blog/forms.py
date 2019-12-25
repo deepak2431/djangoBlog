@@ -1,5 +1,6 @@
 from django import forms
-from .models import Comment, Post, Images
+from django.forms import Textarea
+from .models import Comment, Post, Images, Answer
 
 class CommentForm(forms.Form):
     
@@ -38,8 +39,7 @@ class PostForm(forms.ModelForm):
     topic = forms.CharField(max_length=50,widget=forms.Select(choices=TOPICS))
     class Meta:
         model = Post
-        fields = ('title', 'content', 'topic')    
-
+        fields = ('title', 'topic', 'content')   
 
 
 class ImageForm(forms.ModelForm):
@@ -47,3 +47,19 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Images
         fields = ('image', )
+
+
+class QuestionForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'topic', 'content')   
+        labels = {
+            'content':'Question'
+        }
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        fields = {'answer'}
+        widgets = {
+            'answer':Textarea(attrs={'placeholder':"Type your answer here",'rows':5}),
+        }

@@ -1,11 +1,20 @@
 {% extends "blog/base.html" %}
 {% block content %}
+{% if Q_Form %}
+  <article class="media content-section">
+    <div class="media-body">
+      <h3>Have a question?</h3>
+      <div class="float-right"><a class="mr-2" href="{% url 'question-ask' %}">Click here</a>to post your question.</div>
+    </div>
+  </article>
+{% endif %}
 {% if posts|length == 0 %}
   <div class="alert alert-warning alert-dih4sh4missible fade show" role="alert">
     <h4><strong>SORRY, We were unable to get something related.</strong> </h4>
     
   </div>
 {% else %}
+
     {% for post in posts %}
         <article class="media content-section">
           <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
@@ -14,9 +23,21 @@
               <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
               <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
             </div>
+            {% if post.isQuestion and post.author != user %}
+            <h2>{{post.title}}</h2>
+            {% else %}
             <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+            {% endif %}
             <h5>Topic : {{post.topic}}</h5>
+            {% if post.isQuestion %}
+              <b>Question:</b>
+            {% endif %}
             <p class="article-content">{{ post.content }}</p>
+            {% if post.isQuestion %}
+              <div class="d-flex flex-row-reverse">
+                <a class="mr-2" href="{% url 'answers-list' post.id%}" >Answer</a>
+              </div>
+            {% endif %}
           </div>
         </article>
     {% endfor %}
