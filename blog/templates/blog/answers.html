@@ -12,7 +12,20 @@
             <h5>Topic : {{question.topic}}</h5>
             <b>Question:</b>
             <p class="article-content">{{ question.content }}</p>
+             <div>
+              Share on:
+              <a href="https://www.facebook.com/sharer/sharer.php?u={{request.get_host}}/post/{{post.id}}" target="_blank">
+                <img class="icons" src="/media/social_media_icons/facebook.png" alt="facebook">
+              </a>
+              <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20post%20{{request.get_host}}/post/{{post.id}}" target="_blank">
+                <img class="icons"  src="/media/social_media_icons/twitter.png" alt="twitter">
+              </a>
+              <a href="https://www.linkedin.com/shareArticle?mini=true&url={{request.get_host}}/post/{{post.id}}&title={{post.title}}" target="_blank">
+                <img class="icons"  src="/media/social_media_icons/linkedin.png" alt="linkedin">
+              </a>
+            </div>
         </div>
+
     </article>
         <div class="answers-scroll content-section">
             <h3>
@@ -33,7 +46,7 @@
             </div>
         {% endfor %}
         </div>
-    
+    {% if user.is_authenticated %}
     <div class="content-section">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -45,5 +58,6 @@
             </div>
         </form>
     </div>
+    {% endif %}
 
 {% endblock content %}

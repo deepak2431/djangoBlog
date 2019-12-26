@@ -37,9 +37,21 @@
             <p class="article-content">{{ post.content }}</p>
             {%if post.isQuestion%}
               <div class="d-flex flex-row-reverse">
-                <a class="mr-2" href="{% url 'blog-home'%}" >Answer</a>
+                <a class="mr-2" href="{% url 'answers-list' post.id%}" >Answer</a>
               </div>
             {%endif%}            
+            <div>
+              Share on:
+              <a href="https://www.facebook.com/sharer/sharer.php?u={{request.get_host}}/post/{{post.id}}" target="_blank">
+                <img class="icons" src="/media/social_media_icons/facebook.png" alt="facebook">
+              </a>
+              <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20post%20{{request.get_host}}/post/{{post.id}}" target="_blank">
+                <img class="icons"  src="/media/social_media_icons/twitter.png" alt="twitter">
+              </a>
+              <a href="https://www.linkedin.com/shareArticle?mini=true&url={{request.get_host}}/post/{{post.id}}&title={{post.title}}" target="_blank">
+                <img class="icons"  src="/media/social_media_icons/linkedin.png" alt="linkedin">
+              </a>
+            </div>
           </div>
         </article>
         {% if post.isQuestion %}

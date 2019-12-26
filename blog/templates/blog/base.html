@@ -48,6 +48,7 @@
                   <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
                   <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
                 {% else %}
+                <a class="nav-item nav-link" href="{% url 'question-home' %}">Question Form</a>
                 <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
                 <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
                 {% endif %}
@@ -105,7 +106,9 @@
 
 <footer>
   <div class="container text-center">
-  <p>© Owner {% now "Y" %}</p>
+  <p>© Owner {% now "Y" %}
+  <br><small>Icons made by Freeplk from www.flaticon.com</small>
+  </p>
   </div>
 </footer>
 
