@@ -146,7 +146,7 @@ def askQuestion(request):
                     photo = Images(post=new_post, image=image)
                     photo.save()
             messages.success(request, "Posted!")
-            return HttpResponseRedirect("/")
+            return HttpResponseRedirect("/questions/form/")
         else:
             print(questionForm.errors, formset.errors)
     # if request is GET, display empty forms
