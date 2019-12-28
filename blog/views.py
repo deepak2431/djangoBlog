@@ -65,7 +65,8 @@ class PostDetailView(View):
             'form'      : form,
             'comments'  : comments,
             'images'    : images,
-            'is_liked'  : is_liked
+            'is_liked'  : is_liked,
+            'total_likes': post.total_likes()
         }
         return render(request, 'blog/post_detail.html', context)
     
@@ -99,7 +100,8 @@ class PostDetailView(View):
             'images'    : images,
             'form'      : form,
             'comments'  : comments,
-            'is_liked'  : is_liked
+            'is_liked'  : is_liked,
+            'total_likes': post.total_likes()
             }          
             return render(request, 'blog/post_detail.html',context)
         form = CommentForm()
@@ -119,7 +121,8 @@ class PostDetailView(View):
             'images'    : images,
             'form'      : form,
             'comments'  : comments,
-            'is_liked'  : is_liked
+            'is_liked'  : is_liked,
+            'total_likes': post.total_likes()
         }          
         return render(request, 'blog/post_detail.html', context)
 
@@ -139,20 +142,6 @@ class LikepostView(LoginRequiredMixin ,View):
             post.like.add(request.user)
             is_liked = True
         return HttpResponseRedirect(post.get_absolute_url())
-        # form = CommentForm()
-        # post = get_object_or_404(Post, pk=request.POST.get('post_like'))   
-
-        # comments = Comment.objects.filter(post = post,reply = None).order_by('-id')
-        # images = Images.objects.filter(post=post)
-        # context = {
-        #     'post'      : post,
-        #     'images'    : images,
-        #     'form'      : form,
-        #     'comments'  : comments,
-        #     'is_liked'  : is_liked 
-
-        #     }          
-        # return render(request, 'blog/post_detail.html', context)
     
 
 
