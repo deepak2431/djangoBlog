@@ -53,9 +53,26 @@
               </a>
             </div>
           </div>
+          
         </article>
+
+        <form action="/post/{{ post.pk }}/like/" method="POST">
+          {% csrf_token %}
+          {% if is_liked %}
+            <button type="submit" class="btn btn-danger" name="post_like" value="{{ post.id }}"><i  class="fa fa-thumbs-down"> {{ total_likes }} Like{{ total_likes|pluralize }}</i></button>
+           
+          {% else %}
+          <button type="submit" class="btn btn-primary"  name="post_like" value="{{ post.id }}"><i  class="fa fa-thumbs-up">   {{ total_likes }} Like{{ total_likes|pluralize }}</i></button>
+            
+          {% endif %}
+        
+        </form>
+        
+        
+
         {% if post.isQuestion %}
         {% else %}
+
         
             <div id="respond" class="comment-respond">
               <h3 id="reply-title" class="comment-reply-title">Leave a Comment </h3>	

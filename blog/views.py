@@ -63,14 +63,19 @@ class PostDetailView(View):
     # when clicked on the title of post get function is trigeered 
     def get(self, request, *args, **kwargs):
         post = get_object_or_404(Post, pk=kwargs['pk'])
+        is_liked = False
+        if post.like.filter(id=request.user.id).exists():
+            is_liked = True
         images = Images.objects.filter(post=post)
         form = CommentForm()
         comments = Comment.objects.filter(post = post,reply = None).order_by('-id')
         context = {
-            'post': post,
-            'form': form,
-            'comments' : comments,
-            'images': images
+            'post'      : post,
+            'form'      : form,
+            'comments'  : comments,
+            'images'    : images,
+            'is_liked'  : is_liked,
+            'total_likes': post.total_likes()
         }
         return render(request,'blog/post_detail.html', context)
     
@@ -80,6 +85,9 @@ class PostDetailView(View):
         if form.is_valid():
             
             post = get_object_or_404(Post, pk=kwargs['pk'])
+            is_liked = False
+            if post.like.filter(id=request.user.id).exists():
+                is_liked = True
             reply_id = request.POST.get('comment_id')
             comment_parent = None
             if reply_id:
@@ -92,19 +100,24 @@ class PostDetailView(View):
                 reply = comment_parent
             )
 
-            messages.success(request, 'Comment successful')   
+            messages.success(request, 'Comment successful')  
             images = Images.objects.filter(post=post)
             form = CommentForm()
             comments = Comment.objects.filter(post = post,reply = None).order_by('-id')
             context = {
-            'post': post,
-            'images': images,
-            'form': form,
-            'comments' : comments
+            'post'      : post,
+            'images'    : images,
+            'form'      : form,
+            'comments'  : comments,
+            'is_liked'  : is_liked,
+            'total_likes': post.total_likes()
             }          
             return render(request, 'blog/post_detail.html',context)
         form = CommentForm()
         post = get_object_or_404(Post, pk=kwargs['pk'])   
+        is_liked = False
+        if post.like.filter(id=request.user.id).exists():
+            is_liked = True
 
         messages.warning(request, 'Some error occured')
         comments = Comment.objects.filter(post = post,reply = None).order_by('-id')
@@ -113,12 +126,33 @@ class PostDetailView(View):
 
         
         context = {
-            'post': post,
-            'images': images,
-            'form': form,
-            'comments' : comments
+            'post'      : post,
+            'images'    : images,
+            'form'      : form,
+            'comments'  : comments,
+            'is_liked'  : is_liked,
+            'total_likes': post.total_likes()
         }          
         return render(request, 'blog/post_detail.html', context)
+
+
+
+class LikepostView(LoginRequiredMixin ,View):
+    login_url = 'login'
+    redirect_field_name = 'redirect_to'
+   
+    
+    def post(self, request, *args, **kwargs):
+        post = get_object_or_404(Post, id=request.POST.get('post_like'))
+        is_liked = False
+        if post.like.filter(id=request.user.id).exists():
+            post.like.remove(request.user)
+            is_liked = False
+        else:
+            post.like.add(request.user)
+            is_liked = True
+        return HttpResponseRedirect(post.get_absolute_url())
+    
 
 
 @login_required(login_url='login')
@@ -156,6 +190,7 @@ def askQuestion(request):
     
     context = {'postForm': questionForm, 'formset': formset, 'Q_Form':True}
     return render(request, 'blog/post_form.html', context)
+
 
 
 @login_required(login_url='login')
