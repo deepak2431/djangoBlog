@@ -1,0 +1,63 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ question.author.profile.image.url }}">
+        <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="{% url 'user-posts' question.author.username %}">{{ question.author }}</a>
+              <small class="text-muted">{{ question.date_posted|date:"F d, Y" }}</small>
+            </div>
+            <h2><a class="article-title" href="{% url 'post-detail' question.id %}">{{ question.title }}</a></h2>
+            <h5>Topic : {{question.topic}}</h5>
+            <b>Question:</b>
+            <p class="article-content">{{ question.content }}</p>
+             <div>
+              Share on:
+              <a href="https://www.facebook.com/sharer/sharer.php?u={{request.get_host}}/post/{{post.id}}" target="_blank">
+                <img class="icons" src="/media/social_media_icons/facebook.png" alt="facebook">
+              </a>
+              <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20post%20{{request.get_host}}/post/{{post.id}}" target="_blank">
+                <img class="icons"  src="/media/social_media_icons/twitter.png" alt="twitter">
+              </a>
+              <a href="https://www.linkedin.com/shareArticle?mini=true&url={{request.get_host}}/post/{{post.id}}&title={{post.title}}" target="_blank">
+                <img class="icons"  src="/media/social_media_icons/linkedin.png" alt="linkedin">
+              </a>
+            </div>
+        </div>
+
+    </article>
+        <div class="answers-scroll content-section">
+            <h3>
+                {% if answers|length != 0%}
+                Answers: 
+                {% else %}
+                No answers yet.
+                {% endif %}
+            </h3>
+            {% for ans in answers %}
+            <div class="media-body">
+                <div class="article-metadata">
+                    <img class="rounded-circle article-img" src="{{ ans.author.profile.image.url }}">
+                    <a class="mr-2" href="{% url 'user-posts' ans.author.username %}">{{ ans.author.username }}</a>
+                    <small class="text-muted">{{ ans.date_posted|date:"F d, Y" }}</small>
+                </div>
+                <p class="article-content answers-paragraph">{{ ans.answer }}</p>
+            </div>
+        {% endfor %}
+        </div>
+    {% if user.is_authenticated %}
+    <div class="content-section">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {{answer_form|crispy}}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit"> Submit </button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+{% endblock content %}

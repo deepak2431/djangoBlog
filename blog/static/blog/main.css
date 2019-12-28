@@ -253,3 +253,20 @@ footer{
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.answers-scroll {
+  max-height:30em;
+  overflow-y:scroll;
+}
+
+.answers-paragraph {
+  margin-left:5em;
+}
+.icons{
+  width:2em;
+  height:auto;
+}
+
+.icons:hover{
+  opacity: 0.3;
+}

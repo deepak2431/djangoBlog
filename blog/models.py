@@ -11,6 +11,7 @@ class Post(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     like = models.ManyToManyField(User, related_name='likes', blank='True')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    isQuestion = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
@@ -41,5 +42,8 @@ class Images(models.Model):
 
 
 
-
-
+class Answer(models.Model):
+    question = models.ForeignKey('Post',on_delete=models.CASCADE)
+    answer = models.TextField()
+    date_posted = models.DateTimeField(default=timezone.now)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
