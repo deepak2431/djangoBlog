@@ -20,7 +20,20 @@
             {%endfor%}
             <p class="article-content">{{ post.content }}</p>
           </div>
+          
         </article>
+
+        <form action="/post/{{ post.pk }}/like/" method="POST">
+          {% csrf_token %}
+          {% if is_liked %}
+            <button type="submit" class="btn btn-danger" name="post_like" value="{{ post.id }}">Unlike</button>
+           
+          {% else %}
+          <button type="submit" class="btn btn-primary"  name="post_like" value="{{ post.id }}">Like</button>
+            
+          {% endif %}
+        
+        </form>
         
         
         
