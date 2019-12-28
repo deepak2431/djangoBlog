@@ -5,7 +5,7 @@
 
 -----------------------------------------------------------------------------------------------------------------
 **Functionality:**
-* User has to login first as well new users have to signup. (Without login nothing will work)
+* Users has to login first as well as new users have to signup. (Without login nothing will work).
 * Registered users can write, delete and update a blog.
 
 This application is deployed on heroku. To checkout this application visit this link https://blooggapp.herokuapp.com/
@@ -14,9 +14,9 @@ This application is deployed on heroku. To checkout this application visit this 
 
 1. Click on `Fork`.
 2. Go to your fork and `clone` the project to your local machine.
-3. Install the requirements `pip install -r requirements.txt`
-4. Apply the migrations `python manage.py migrate`
-5. Finally, run the development server `python manage.py runserver`
+3. Install the requirements `pip install -r requirements.txt`.
+4. Apply the migrations `python manage.py migrate`.
+5. Finally, run the development server `python manage.py runserver`.
 
 The project will be available at **127.0.0.1:8000**.
 
