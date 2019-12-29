@@ -9,6 +9,7 @@ class Post(models.Model):
     topic = models.CharField(max_length=50,blank = False,default=('NONE','None'),choices=TOPICS)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
+    like = models.ManyToManyField(User, related_name='likes', blank='True')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     isQuestion = models.BooleanField(default=False)
 
@@ -17,6 +18,9 @@ class Post(models.Model):
         
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk':self.pk})
+    
+    def total_likes(self):
+        return self.like.count()
 
 class Comment(models.Model):
 
