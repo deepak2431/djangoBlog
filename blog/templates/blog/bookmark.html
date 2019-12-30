@@ -1,0 +1,69 @@
+{% extends "blog/base.html" %}
+{% block content %}
+{% if posts|length == 0 %}
+  <div class="alert alert-warning alert-dih4sh4missible fade show" role="alert">
+    <h4><strong>You have not saved anything yet.</strong> </h4>
+    
+  </div>
+{% else %} 
+
+      {% for post in posts %}
+
+          
+              <article class="media content-section">
+              <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+              <div class="media-body">
+                  <div class="article-metadata">
+                  <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+                  <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                  </div>
+
+                  <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+
+                  <h5>Topic : {{post.topic}}</h5>
+
+                  <p class="article-content">{{ post.content }}</p>
+                  <div>
+                  Share on:
+                  <a href="https://www.facebook.com/sharer/sharer.php?u={{request.get_host}}/post/{{post.id}}" target="_blank">
+                      <img class="icons" src="/media/social_media_icons/facebook.png" alt="facebook">
+                  </a>
+                  <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20post%20{{request.get_host}}/post/{{post.id}}" target="_blank">
+                      <img class="icons"  src="/media/social_media_icons/twitter.png" alt="twitter">
+                  </a>
+                  <a href="https://www.linkedin.com/shareArticle?mini=true&url={{request.get_host}}/post/{{post.id}}&title={{post.title}}&summary=check%20out%20this%20post&source={{request.get_host}}" target="_blank">
+                      <img class="icons"  src="/media/social_media_icons/linkedin.png" alt="linkedin">
+                  </a>
+                  </div>
+              </div>
+              </article>
+          
+      {% endfor %}
+      {% if is_paginated %}
+
+      {% if page_obj.has_previous %}
+      <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+      {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+
+      {% endif %}
+      {% comment %} <footer>
+      <div>
+      <small text="text-muted"> Icons made by Freepik from www.flaticon.com </small>
+      </div>
+      </footer> {% endcomment %}
+{% endif %}
+{% endblock content %}

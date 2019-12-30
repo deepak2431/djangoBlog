@@ -3,7 +3,9 @@ from .views import (PostListView,
                     PostDeleteView,
                     PostDetailView,
                      UserPostListView,
-                     LikepostView)
+                     LikepostView,
+                     PostmarkedView,
+                     SavepostView)
 from .import views
 
 urlpatterns = [
@@ -17,5 +19,7 @@ urlpatterns = [
     path('post/<int:pk>/update/', views.updatePost, name='post-update'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('about/', views.about, name='blog-about'),
+    path('bookmarks/',PostmarkedView.as_view() , name='blog-save'),
     path('post/<int:pk>/like/',LikepostView.as_view() ,name='post-like'),
+    path('post/<int:pk>/save/',SavepostView.as_view() ,name='post-save'),
 ]

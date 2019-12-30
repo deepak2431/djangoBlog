@@ -53,6 +53,18 @@
               </a>
             </div>
           </div>
+
+          <form action="/post/{{ post.pk }}/save/" method="POST">
+            {% csrf_token %}
+            {% if is_saved %}
+              <button type="submit" title="Remove from save" class="btn btn-info" name="post_save" value="{{ post.id }}"><i  class="fa fa-bookmark">   </i></button>
+             
+            {% else %}
+            <button type="submit" title="Save post" class="btn btn-outline-info"  name="post_save" value="{{ post.id }}"><i  class="fa fa-bookmark"> </i></button>
+              
+            {% endif %}
+          
+          </form>
           
         </article>
 
