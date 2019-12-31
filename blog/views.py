@@ -69,6 +69,8 @@ class PostDetailView(View):
         images = Images.objects.filter(post=post)
         form = CommentForm()
         comments = Comment.objects.filter(post = post,reply = None).order_by('-id')
+        if request.user.is_authenticated and request.user != post.author:
+            post.viewed_users.add(request.user)
         context = {
             'post'      : post,
             'form'      : form,
