@@ -35,6 +35,11 @@
             <img src={{i.image.url}} style="width:500px; height: 300px;">
             {%endfor%}
             <p class="article-content">{{ post.content }}</p>
+            {%if post.isQuestion%}
+              <div class="d-flex flex-row-reverse">
+                <a class="mr-2" href="{% url 'answers-list' post.id%}" >Answer</a>
+              </div>
+            {%endif%}            
             <div>
               Share on:
               <a href="https://www.facebook.com/sharer/sharer.php?u={{request.get_host}}/post/{{post.id}}" target="_blank">
@@ -46,32 +51,9 @@
               <a href="https://www.linkedin.com/shareArticle?mini=true&url={{request.get_host}}/post/{{post.id}}&title={{post.title}}" target="_blank">
                 <img class="icons"  src="/media/social_media_icons/linkedin.png" alt="linkedin">
               </a>
-              <div class="d-flex flex-row-reverse">
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#viewersList">Views({{post.viewed_users.all|length}})</button>
-                {% if post.isQuestion %}
-                  <a class="mr-2 btn btn-success" role="button" href="{% url 'answers-list' post.id%}" >Answer</a>
-                {% endif %}
-              </div>
             </div>
-            <div class="modal fade" id="viewersList" role="dialog">
-              <div class="modal-dialog modal-dialog-centered modal-sm">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal=title float-left">Viewed by</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  </div>
-                  <div class="modal-body">
-                    {% for user in post.viewed_users.all %}
-                      <div>
-                        <img class="rounded-circle article-img" src="{{ user.profile.image.url }}">
-                        <a class="mr-2" href="{% url 'user-posts' user.username %}">{{ user }}</a>
-                      <div>
-                    {% endfor %}
-                  </div>
-                </div>
-              </div>
-            </div>          
           </div>
+          
         </article>
 
         <form action="/post/{{ post.pk }}/like/" method="POST">

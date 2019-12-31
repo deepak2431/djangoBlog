@@ -23,13 +23,21 @@
               <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
               <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
             </div>
+            {% comment %} {% if post.isQuestion and post.author != user %} {% endcomment %}
+            {% comment %} <h2>{{post.title}}</h2> {% endcomment %}
+            {% comment %} {% else %} {% endcomment %}
             <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+            {% comment %} {% endif %} {% endcomment %}
             <h5>Topic : {{post.topic}}</h5>
             {% if post.isQuestion %}
               <b>Question:</b>
             {% endif %}
             <p class="article-content">{{ post.content }}</p>
-
+            {% if post.isQuestion %}
+              <div class="d-flex flex-row-reverse">
+                <a class="mr-2" href="{% url 'answers-list' post.id%}" >Answer</a>
+              </div>
+            {% endif %}
             <div>
               Share on:
               <a href="https://www.facebook.com/sharer/sharer.php?u={{request.get_host}}/post/{{post.id}}" target="_blank">
@@ -41,30 +49,6 @@
               <a href="https://www.linkedin.com/shareArticle?mini=true&url={{request.get_host}}/post/{{post.id}}&title={{post.title}}&summary=check%20out%20this%20post&source={{request.get_host}}" target="_blank">
                 <img class="icons"  src="/media/social_media_icons/linkedin.png" alt="linkedin">
               </a>
-              <div class="d-flex flex-row-reverse">
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#viewersList">Views({{post.viewed_users.all|length}})</button>
-                {% if post.isQuestion %}
-                  <a class="mr-2 btn btn-success" role="button" href="{% url 'answers-list' post.id%}" >Answer</a>
-                {% endif %}
-              </div>
-            </div>
-            <div class="modal fade" id="viewersList" role="dialog">
-              <div class="modal-dialog modal-dialog-centered modal-sm">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal=title float-left">Viewed by</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  </div>
-                  <div class="modal-body">
-                    {% for user in post.viewed_users.all %}
-                      <div>
-                        <img class="rounded-circle article-img" src="{{ user.profile.image.url }}">
-                        <a class="mr-2" href="{% url 'user-posts' user.username %}">{{ user }}</a>
-                      <div>
-                    {% endfor %}
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </article>
