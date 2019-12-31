@@ -35,6 +35,11 @@
             <img src={{i.image.url}} style="width:500px; height: 300px;">
             {%endfor%}
             <p class="article-content">{{ post.content }}</p>
+            {%if post.isQuestion%}
+              <div class="d-flex flex-row-reverse">
+                <a class="mr-2" href="{% url 'answers-list' post.id%}" >Answer</a>
+              </div>
+            {%endif%}            
             <div>
               Share on:
               <a href="https://www.facebook.com/sharer/sharer.php?u={{request.get_host}}/post/{{post.id}}" target="_blank">
@@ -70,8 +75,9 @@
                   </div>
                 </div>
               </div>
-            </div>          
+            </div> 
           </div>
+          
         </article>
 
         <form action="/post/{{ post.pk }}/like/" method="POST">

@@ -29,7 +29,6 @@
               <b>Question:</b>
             {% endif %}
             <p class="article-content">{{ post.content }}</p>
-
             <div>
               Share on:
               <a href="https://www.facebook.com/sharer/sharer.php?u={{request.get_host}}/post/{{post.id}}" target="_blank">
@@ -41,7 +40,7 @@
               <a href="https://www.linkedin.com/shareArticle?mini=true&url={{request.get_host}}/post/{{post.id}}&title={{post.title}}&summary=check%20out%20this%20post&source={{request.get_host}}" target="_blank">
                 <img class="icons"  src="/media/social_media_icons/linkedin.png" alt="linkedin">
               </a>
-              <div class="d-flex flex-row-reverse">
+                            <div class="d-flex flex-row-reverse">
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#viewersList">Views({{post.viewed_users.all|length}})</button>
                 {% if post.isQuestion %}
                   <a class="mr-2 btn btn-success" role="button" href="{% url 'answers-list' post.id%}" >Answer</a>
