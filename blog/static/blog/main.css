@@ -270,3 +270,7 @@ footer{
 .icons:hover{
   opacity: 0.3;
 }
+
+.align-right{
+  text-align: right;
+}
