@@ -70,13 +70,14 @@
                       <div>
                         <img class="rounded-circle article-img" src="{{ user.profile.image.url }}">
                         <a class="mr-2" href="{% url 'user-posts' user.username %}">{{ user }}</a>
-                      <div>
+                      </div>
                     {% endfor %}
                   </div>
                 </div>
               </div>
             </div> 
           </div>
+        
 
           <form action="/post/{{ post.pk }}/save/" method="POST">
             {% csrf_token %}
@@ -89,8 +90,8 @@
             {% endif %}
           
           </form>
-          
-        </article>
+         </article> 
+        
 
         <form action="/post/{{ post.pk }}/like/" method="POST">
           {% csrf_token %}
