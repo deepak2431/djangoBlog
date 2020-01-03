@@ -10,7 +10,11 @@ class Post(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     like = models.ManyToManyField(User, related_name='likes', blank='True')
+
+    save = models.ManyToManyField(User, related_name='saves', blank='True')
+
     viewed_users = models.ManyToManyField(User, related_name="viewed_users")
+
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     isQuestion = models.BooleanField(default=False)
 

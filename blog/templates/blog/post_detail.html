@@ -70,15 +70,28 @@
                       <div>
                         <img class="rounded-circle article-img" src="{{ user.profile.image.url }}">
                         <a class="mr-2" href="{% url 'user-posts' user.username %}">{{ user }}</a>
-                      <div>
+                      </div>
                     {% endfor %}
                   </div>
                 </div>
               </div>
             </div> 
           </div>
+        
+
+          <form action="/post/{{ post.pk }}/save/" method="POST">
+            {% csrf_token %}
+            {% if is_saved %}
+              <button type="submit" title="Remove from save" class="btn btn-info" name="post_save" value="{{ post.id }}"><i  class="fa fa-bookmark">   </i></button>
+             
+            {% else %}
+            <button type="submit" title="Save post" class="btn btn-outline-info"  name="post_save" value="{{ post.id }}"><i  class="fa fa-bookmark"> </i></button>
+              
+            {% endif %}
           
-        </article>
+          </form>
+         </article> 
+        
 
         <form action="/post/{{ post.pk }}/like/" method="POST">
           {% csrf_token %}
