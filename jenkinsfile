@@ -63,7 +63,7 @@ pipeline{
                     }
                 }
             }
-        }
+        
         
         stage('Delete unusing images') {
             steps {
@@ -71,7 +71,7 @@ pipeline{
                     docker.withServer('tcp://3.20.118.83:4342', 'cert') { 
                         sh "docker --tlsverify --tlscacert=/var/docker/ca.pem --tlscert=/var/docker/cert.pem --tlskey=/var/docker/key.pem   -H=3.20.118.83:4342 rmi $registry:$BUILD_NUMBER"
                         } 
-                    }
+                   }
                 }    
             }
         }
