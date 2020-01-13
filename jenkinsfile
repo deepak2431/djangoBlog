@@ -58,7 +58,7 @@ pipeline{
             steps { 
                 script {
                     docker.withServer('tcp://3.20.118.83:4342', 'cert') {
-                       dockerImage.run('-p 80:8000')
+                       dockerImage.run('-p 80:8000 --rm')
                        }
                     }
                 }
