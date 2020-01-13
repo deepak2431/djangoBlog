@@ -33,9 +33,9 @@ pipeline{
             steps {
                 script {
                     docker.withServer('tcp://3.20.118.83:4342', 'cert') {
-                       dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                       dockerImage = docker.build("revolyram/djangoBlog:${BUILD_NUMBER}"
                      //  def image = docker.build("revolyram/djangoBlog:${BUILD_NUMBER}"
-                       Image.push(${image})
+                       dockerImage.push()
                        }
                     }
                 }
