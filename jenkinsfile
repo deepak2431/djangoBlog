@@ -29,12 +29,25 @@ pipeline{
                 ])
             }    
         }
+        
         stage('Build image') {
             steps {
                 script {
                     docker.withServer('tcp://3.20.118.83:4342', 'cert') {
                        def dockerImage = docker.build("revolyram/djangoblog:${BUILD_NUMBER}")
                        docker.withRegistry('https://hub.docker.com/repository/docker/revolyram/djangoblog', ${ARTIFACTORY}) {                       
+                            dockerImage.push()
+                            }
+                       }
+                    }
+                }
+            }
+
+        stage('Push image') {
+            steps {
+                script {
+                    docker.withServer('tcp://3.20.118.83:4342', 'cert') {
+                        docker.withRegistry('https://hub.docker.com/repository/docker/revolyram/djangoblog', ${ARTIFACTORY}) {                       
                             dockerImage.push()
                             }
                        }
