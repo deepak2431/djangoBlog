@@ -67,10 +67,8 @@ pipeline{
         
         stage('Delete unusing images') {
             steps {
-                script {
-                    docker.withServer('tcp://3.20.118.83:4342', 'cert') { 
-                        sh "docker --tlsverify --tlscacert=/home/jenkins/.tls/ca.pem --tlscert=/home/jenkins/.tls/cert.pem --tlskey=/home/jenkins/.tls/key.pem -H=3.20.118.83:4342 rmi $registry:$BUILD_NUMBER"
-                        } 
+                script {                    
+                    sh "docker --tlsverify --tlscacert=/home/jenkins/.tls/ca.pem --tlscert=/home/jenkins/.tls/cert.pem --tlskey=/home/jenkins/.tls/key.pem -H=3.20.118.83:4342 rmi $registry:$BUILD_NUMBER"                       
                     }
                 }    
             }
