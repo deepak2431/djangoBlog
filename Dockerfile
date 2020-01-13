@@ -14,8 +14,8 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
         && wget --no-check-certificate https://bootstrap.pypa.io/get-pip.py \
         && python$VER get-pip.py \
         && rm -rf /opt/Python-$VERPY.tgz get-pip.py /var/lib/apt/lists/* \
-        && git clone https://github.com/erlotsman/djangoBlog.git \
         && git config --global http.sslVerify false \
+        && git clone https://github.com/erlotsman/djangoBlog.git \      
         && cd djangoBlog \
         && pip install -r requirements.txt \
         && python$VER manage.py migrate \
