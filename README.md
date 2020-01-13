@@ -1,7 +1,7 @@
 # Django Blog
 
 [![Python Version](https://img.shields.io/badge/python-3.8-brightgreen.svg)](https://python.org)
-[![Django Version](https://img.shields.io/badge/django-2.1-brightgreen.svg)](https://djangoproject.com) [![Join the chat at https://gitter.im/djangoBlog-lobby/community](https://badges.gitter.im/djangoBlog-lobby/community.svg)](https://gitter.im/djangoBlog-lobby/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Django Version](https://img.shields.io/badge/django-2.2-brightgreen.svg)](https://djangoproject.com) [![Join the chat at https://gitter.im/djangoBlog-lobby/community](https://badges.gitter.im/djangoBlog-lobby/community.svg)](https://gitter.im/djangoBlog-lobby/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 -----------------------------------------------------------------------------------------------------------------
 **Functionality:**
