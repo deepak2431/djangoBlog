@@ -44,7 +44,7 @@ pipeline{
                             }
                         }
                     }
-                    catch {
+                    catch (Exception e) {
                         echo "Skipped stage"
                     }
                 }
