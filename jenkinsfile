@@ -68,10 +68,9 @@ pipeline{
         stage('Delete unusing images') {
             steps {
                 script {
-                    docker.withServer('tcp://3.20.118.83:4342', 'cert') {
-                        sh docker --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem   -H=3.20.118.83:4342 run -p 80:8000 rmi \
-                        docker --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem   -H=3.20.118.83:4342 run -p 80:8000 images -q
-                        }
+                    docker.withServer('tcp://3.20.118.83:4342', 'cert') { 
+                        sh "docker --tlsverify --tlscacert=/var/docker/ca.pem --tlscert=/var/docker/cert.pem --tlskey=/var/docker/key.pem   -H=3.20.118.83:4342 run -p 80:8000 rmi $registry:$BUILD_NUMBER"
+                        } 
                     }
                 }    
             }
