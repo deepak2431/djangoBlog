@@ -12,4 +12,4 @@ RUN git config --global http.sslVerify false \
         && per=`wget -qO- ifconfig.co` \
         && sed -i "s+127.0.0.1+$per+g" /usr/local/lib/python$VER/site-packages/django/http/request.py
 
-CMD bash
+CMD /bin/sh -c "python$VER /djangoBlog/manage.py runserver 0.0.0.0:8000"
