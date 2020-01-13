@@ -77,11 +77,13 @@ pipeline{
         success {
             script {
                 mail bcc: '', body: 'Success', cc: '', from: '', replyTo: '', subject: 'build', to: 'revolyram@gmail.com'
+                echo "SUCCES"
                 }
             }
         unsuccessful {
             script {
                 mail bcc: '', body: 'Unsuccessful', cc: '', from: '', replyTo: '', subject: 'build', to: 'revolyram@gmail.com'
+                echo "FAILURE"
                 }
             }
         }            
