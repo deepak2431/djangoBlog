@@ -9,6 +9,7 @@ pipeline{
     
     environment {
         registry = "revolyram/djangoblog"
+        serverCert = 'cert'
         registryCredential = 'DockerHub'
     }
 
@@ -34,7 +35,7 @@ pipeline{
         stage('Build image') {
             steps {
                 script {
-                    docker.withServer('tcp://3.20.118.83:4342', 'cert') {
+                    docker.withServer('tcp://3.20.118.83:4342', serverCert) {
                        def dockerImage = docker.build registry + ":$BUILD_NUMBER"                      
                     }
                 }
@@ -44,9 +45,11 @@ pipeline{
         stage('Push image') {
             steps { 
                 script {
-                    docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()
-                        }
+                    docker.withServer('tcp://3.20.118.83:4342', serverCert) {
+                        docker.withRegistry( '', registryCredential ) {
+                            dockerImage.push()
+                            }
+                        }    
                     }
                 }
             }
