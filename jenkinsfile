@@ -44,7 +44,7 @@ pipeline{
             steps {
                 script {
                     docker.withServer('tcp://3.20.118.83:4342', 'cert') {
-                        docker.withRegistry('https://hub.docker.com/repository/docker/revolyram/djangoblog', ${ARTIFACTORY}) {                       
+                        docker.withRegistry('https://hub.docker.com/repository/docker/revolyram/djangoblog', 'DockerHub') {                       
                             dockerImage.push()
                             }
                        }
