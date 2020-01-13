@@ -9,7 +9,7 @@ pipeline{
     
     environment {
         registry = "revolyram/djangoblog"
-        registryCredential = 'dockerhub'
+        registryCredential = 'DockerHub'
     }
 
     triggers {
