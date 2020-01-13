@@ -23,17 +23,7 @@ pipeline{
     }    
        
     stages { 
-          
-        stage('Build image') {
-            steps {
-                script {
-                    docker.withServer('tcp://3.20.118.83:4342', serverCert) {
-                       dockerImage = docker.build registry + ":$BUILD_NUMBER"                     
-                       }
-                    }
-                }
-            }
-        
+                      
         stage('Delete old blog') {
             steps {
                 script {
@@ -47,6 +37,16 @@ pipeline{
                             echo "Skipped stage"
                             }
                     } 
+                }
+            }
+        
+        stage('Build image') {
+            steps {
+                script {
+                    docker.withServer('tcp://3.20.118.83:4342', serverCert) {
+                       dockerImage = docker.build registry + ":$BUILD_NUMBER"                     
+                       }
+                    }
                 }
             }
         
