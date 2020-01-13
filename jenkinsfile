@@ -53,6 +53,16 @@ pipeline{
                     }
                 }
             }
+        
+        stage('Run blog') {
+            steps { 
+                script {
+                    docker.withServer('tcp://3.20.118.83:4342', 'cert') {
+                       dockerImage.run()
+                       }
+                    }
+                }
+            }
         }
     }
 
