@@ -22,8 +22,7 @@ pipeline{
         )
     }
        
-    stages {
-              
+    stages {              
         stage('Build image') {
             steps {
                 script {
@@ -55,6 +54,7 @@ pipeline{
                     }
                 }
             }
+        }
             
     post {
         success {
@@ -67,6 +67,5 @@ pipeline{
                 mail bcc: '', body: 'Unsuccessful', cc: '', from: '', replyTo: '', subject: 'build', to: 'revolyram@gmail.com'
                 }
             }
-        }        
+        }            
     }
-}
