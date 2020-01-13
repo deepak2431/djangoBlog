@@ -72,6 +72,12 @@ pipeline{
                     }
                 }    
             }
+            post {
+                script {
+                    mail bcc: '', body: 'Success', cc: '', from: '', replyTo: '', subject: 'build', to: 'revolyram@gmail.com'
+                    }
+                }
+            }    
         }
     }
 
