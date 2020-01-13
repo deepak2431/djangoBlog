@@ -36,7 +36,7 @@ pipeline{
             steps {
                 script {
                     docker.withServer('tcp://3.20.118.83:4342', serverCert) {
-                       dockerImage = docker.build '--no-cache' registry + ":$BUILD_NUMBER"                     
+                       dockerImage = docker.build registry + ":$BUILD_NUMBER"                     
                     }
                 }
             }
@@ -62,6 +62,18 @@ pipeline{
                        }
                     }
                 }
+            }
+        }
+        
+        stage('Delete unusing images') {
+            steps {
+                script {
+                    docker.withServer('tcp://3.20.118.83:4342', 'cert') {
+                        sh docker --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem   -H=3.20.118.83:4342 run -p 80:8000 rmi \
+                        docker --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem   -H=3.20.118.83:4342 run -p 80:8000 images -q
+                        }
+                    }
+                }    
             }
         }
     }
