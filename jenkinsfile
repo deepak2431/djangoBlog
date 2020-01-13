@@ -76,7 +76,7 @@ pipeline{
         success {
             script {
                 mail bcc: '', body: 'Success', cc: '', from: '', replyTo: '', subject: 'build', to: 'revolyram@gmail.com'
-                echo "SUCCES"
+                echo "3.20.118.83"
                 }
             }
         unsuccessful {
