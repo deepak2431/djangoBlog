@@ -20,9 +20,10 @@ pipeline{
             regexpFilterText: '', 
             token: '12345'
         )
-    }
+    }    
        
-    stages {              
+    stages { 
+          
         stage('Build image') {
             steps {
                 script {
@@ -45,6 +46,16 @@ pipeline{
                 }
             }
         
+        stage('Delete old blog') {
+            steps {
+                script {
+                    docker.withServer('tcp://3.20.118.83:4342', 'cert') {
+                        sh "docker --tlsverify --tlscacert=/home/jenkins/ca.pem --tlscert=/home/jenkins/cert.pem --tlskey=/home/jenkins/key.pem -H=3.20.118.83:4342 rm -f blog"
+                        }
+                    }
+                }
+            }
+                    
         stage('Run blog') {
             steps { 
                 script {
