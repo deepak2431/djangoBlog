@@ -8,7 +8,8 @@ pipeline{
     }
     
     environment {
-        ARTIFACTORY = credentials('DockerHub')
+        registry = "revolyram/djangoblog"
+        registryCredential = 'dockerhub'
     }
 
     triggers {
@@ -34,11 +35,7 @@ pipeline{
             steps {
                 script {
                     docker.withServer('tcp://3.20.118.83:4342', 'cert') {
-                       def dockerImage = docker.build("revolyram/djangoblog:${BUILD_NUMBER}")
-                       docker.withRegistry('DockerHub') {                       
-                            dockerImage.push("revolyram/djangoblog:${BUILD_NUMBER}")
-                            }
-                       }
+                       def dockerImage = docker.build registry + ":$BUILD_NUMBER"                      
                     }
                 }
             }
