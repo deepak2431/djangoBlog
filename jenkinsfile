@@ -29,7 +29,7 @@ pipeline{
                 script {
                     try {
                         docker.withServer('tcp://3.20.118.83:4342', 'cert') {
-                            sh "try docker --tlsverify --tlscacert=/home/jenkins/ca.pem --tlscert=/home/jenkins/cert.pem --tlskey=/home/jenkins/key.pem -H=3.20.118.83:4342 rm -f blog"
+                            sh "docker --tlsverify --tlscacert=/home/jenkins/ca.pem --tlscert=/home/jenkins/cert.pem --tlskey=/home/jenkins/key.pem -H=3.20.118.83:4342 rm -f blog"
                             echo "Old blog was deleted"
                             }
                         } catch (e) {
@@ -43,7 +43,7 @@ pipeline{
             steps {
                 script {
                     docker.withServer('tcp://3.20.118.83:4342', serverCert) {
-                       dockerImage = docker.build("${registery}:${BUILD_NUMBER}", '--no-cache')
+                       dockerImage = docker.build("${registery}:${BUILD_NUMBER}", '--no-cache .')
                        }
                     }
                 }
