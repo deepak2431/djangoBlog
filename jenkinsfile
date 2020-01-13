@@ -33,12 +33,18 @@ pipeline{
             steps {
                 script {
                     docker.withServer('tcp://3.20.118.83:4342', 'cert') {
-                       def image = docker.image 
-        stage('Run php-fpm') {
+                       def image = docker.build("revolyram/djangoBlog:${BUILD_NUMBER}"
+                       image.push()
+                       }
+                    }
+                }
+            }
+            
+        stage('Run blog') {
             steps {
                 script {
                     docker.withServer('tcp://3.20.118.83:4342', 'cert') {
-                       def image = docker.image('revolyram/php-fpm').run()
+                       image.run()
                     }
                 }    
             }            
