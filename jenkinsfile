@@ -69,9 +69,9 @@ pipeline{
             steps {
                 script {
                     docker.withServer('tcp://3.20.118.83:4342', 'cert') { 
-                        sh "docker serverCert -H=3.20.118.83:4342 rmi $registry:$BUILD_NUMBER"
+                        sh "docker --tlsverify --tlscacert=/home/ec2-user/.tls/ca.pem --tlscert=/home/ec2-user/.tls/cert.pem --tlskey=/home/ec2-user/.tls/key.pem -H=3.20.118.83:4342 rmi $registry:$BUILD_NUMBER"
                         } 
-                   }
+                    }
                 }    
             }
         }
