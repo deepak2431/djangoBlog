@@ -44,7 +44,7 @@ pipeline{
             steps {
                 script {
                     docker.withServer('tcp://3.20.118.83:4342', serverCert) {
-                       dockerImage = docker.build("--no-cache", -t registry + ":$BUILD_NUMBER")                    
+                       dockerImage = docker.build("${registery}:${BUILD_NUMBER}", '--no-cache --rm .')
                        }
                     }
                 }
