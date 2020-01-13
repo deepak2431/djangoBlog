@@ -1,0 +1,47 @@
+pipeline{    
+    
+    agent any
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '30')) 
+        timeout(time: 1, unit: 'HOURS')               
+    }
+    
+    environment {
+        ARTIFACTORY = credentials('DockerHub')
+    }
+
+    triggers {
+        GenericTrigger(
+            causeString: 'Generic Cause', 
+            regexpFilterExpression: '', 
+            regexpFilterText: '', 
+            token: '12345'
+        )
+    }
+       
+    stages {
+        stage('Check scm') {
+            steps {
+                git([
+                    url: "https://github.com/erlotsman/djangoBlog",
+                    branch: 'master'
+                ])
+            }    
+        }
+        stage('Build image') {
+            steps {
+                script {
+                    docker.withServer('tcp://3.20.118.83:4342', 'cert') {
+                       def image = docker.image 
+        stage('Run php-fpm') {
+            steps {
+                script {
+                    docker.withServer('tcp://3.20.118.83:4342', 'cert') {
+                       def image = docker.image('revolyram/php-fpm').run()
+                    }
+                }    
+            }            
+        }
+    }           
+}
