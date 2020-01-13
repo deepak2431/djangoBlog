@@ -46,7 +46,7 @@ pipeline{
                 }
             }
              
-        stage('Delete old blog') {
+        stage('Delete old version') {
             steps {
                 script {
                     try {
