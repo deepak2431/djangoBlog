@@ -75,8 +75,18 @@ pipeline{
     post {
         success {
             script {
-                emailext body: '''IP 3.20.118.83
-                Host http://blog.revolyram.pp.ua/''', recipientProviders: [requestor()], subject: '$PROJECT_NAME - Build # $BUILD_NUMBER', to: 'erlotsman@gmail.com'
+                emailext body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+Check console output at $BUILD_URL to view the results.
+IP 3.20.118.83
+Host http://blog.revolyram.pp.ua/''', recipientProviders: [requestor()], replyTo: 'noreply@gmail.com', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'erlotsman@gmail.com'
+                }
+            }
+        unsuccessful {
+            script {
+                emailext body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+Check console output at $BUILD_URL to view the results.
+IP 3.20.118.83
+Host http://blog.revolyram.pp.ua/''', recipientProviders: [requestor()], replyTo: 'noreply@gmail.com', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'erlotsman@gmail.com'
                 }
             }
         }            
