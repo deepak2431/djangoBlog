@@ -75,14 +75,8 @@ pipeline{
     post {
         success {
             script {
-                mail bcc: '', body: 'Success', cc: '', from: '', replyTo: '', subject: 'build', to: 'revolyram@gmail.com'
-                echo "3.20.118.83"
-                }
-            }
-        unsuccessful {
-            script {
-                mail bcc: '', body: 'Unsuccessful', cc: '', from: '', replyTo: '', subject: 'build', to: 'revolyram@gmail.com'
-                echo "FAILURE"
+                emailext body: '''IP 3.20.118.83
+                Host http://blog.revolyram.pp.ua/''', recipientProviders: [requestor()], subject: '$PROJECT_NAME - Build # $BUILD_NUMBER', to: 'erlotsman@gmail.com'
                 }
             }
         }            
