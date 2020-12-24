@@ -89,6 +89,7 @@ object Build : BuildType({
         }
         vcsLabeling {
             vcsRootId = "${DslContext.settingsRoot.id}"
+            labelingPattern = "%teamcity.build.branch%-%build.number%"
             successfulOnly = true
             branchFilter = ""
         }
