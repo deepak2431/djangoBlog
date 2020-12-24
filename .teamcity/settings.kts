@@ -57,7 +57,7 @@ object Build : BuildType({
                 source = file {
                     path = "Dockerfile"
                 }
-                namesAndTags = "revolyram/djangoblog:%teamcity.build.branch%"
+                namesAndTags = "revolyram/djangoblog:%build.counter%"
                 commandArgs = "--pull"
             }
         }
