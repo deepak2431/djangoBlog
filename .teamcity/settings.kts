@@ -1,5 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.dockerSupport
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.vcsLabeling
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dockerCommand
 import jetbrains.buildServer.configs.kotlin.v2019_2.projectFeatures.dockerRegistry
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
@@ -80,6 +81,11 @@ object Build : BuildType({
             loginToRegistry = on {
                 dockerRegistryId = "PROJECT_EXT_3"
             }
+        }
+        vcsLabeling {
+            vcsRootId = "${DslContext.settingsRoot.id}"
+            successfulOnly = true
+            branchFilter = ""
         }
     }
 })
