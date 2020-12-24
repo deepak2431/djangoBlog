@@ -48,7 +48,6 @@ object Build : BuildType({
                 namesAndTags = "revolyram/blog:%teamcity.build.branch%"
                 commandArgs = "--pull"
             }
-            param("dockerImage.platform", "linux")
         }
         dockerCommand {
             name = "Push blog"
