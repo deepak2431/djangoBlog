@@ -51,7 +51,6 @@ object Build : BuildType({
         }
         dockerCommand {
             name = "Push blog"
-            enabled = false
             commandType = push {
                 namesAndTags = "revolyram/blog:%teamcity.build.branch%"
             }
