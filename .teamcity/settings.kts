@@ -49,6 +49,12 @@ object Build : BuildType({
                 commandArgs = "--pull"
             }
         }
+        dockerCommand {
+            name = "Push blog"
+            commandType = push {
+                namesAndTags = "revolyram/blog:%teamcity.build.branch%"
+            }
+        }
     }
 
     triggers {
