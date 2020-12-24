@@ -63,7 +63,7 @@ object Build : BuildType({
         dockerCommand {
             name = "Push blog"
             commandType = push {
-                namesAndTags = "revolyram/blog:%build.number%"
+                namesAndTags = "revolyram/djangoblog:%build.number%"
             }
         }
     }
