@@ -1,5 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dockerCommand
+import jetbrains.buildServer.configs.kotlin.v2019_2.projectFeatures.dockerRegistry
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 
 /*
@@ -29,6 +30,16 @@ version = "2020.2"
 project {
 
     buildType(Build)
+
+    features {
+        dockerRegistry {
+            id = "PROJECT_EXT_3"
+            name = "Docker Registry"
+            url = "https://docker.io"
+            userName = "revolyram"
+            password = "credentialsJSON:8b0c4741-a4bf-46b3-933a-46bf202033c9"
+        }
+    }
 }
 
 object Build : BuildType({
