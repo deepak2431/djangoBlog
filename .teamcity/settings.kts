@@ -56,7 +56,7 @@ object Build : BuildType({
                 source = file {
                     path = "Dockerfile"
                 }
-                namesAndTags = "revolyram/blog:%teamcity.build.branch%"
+                namesAndTags = "revolyram/blog:%build.number%"
                 commandArgs = "--pull"
             }
         }
