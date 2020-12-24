@@ -63,7 +63,7 @@ object Build : BuildType({
         dockerCommand {
             name = "Push blog"
             commandType = push {
-                namesAndTags = "revolyram/blog:%teamcity.build.branch%"
+                namesAndTags = "revolyram/blog:%build.number%"
             }
         }
     }
