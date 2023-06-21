@@ -1,4 +1,4 @@
-from .models import Student
+from .models import Recruit
 import django.forms as forms
 
 

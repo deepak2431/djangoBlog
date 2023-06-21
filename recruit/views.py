@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from datetime import date
 from .forms import CandidateCheckinForm
-from .models import Student, Task, Event
+from .models import Recruit, Task, Event
 from django.http import HttpResponse
 
 
@@ -22,7 +22,7 @@ def checkin(request, event_name):
     if form.is_valid():
 
         # save the form data to model
-        student = Student.objects.create(name=request.POST.get("name"), email=request.POST.get("email"))
+        student = Recruit.objects.create(name=request.POST.get("name"), email=request.POST.get("email"))
         student.save()
 
         # Add student to the event if there is an event with the name in the URL

@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Student(models.Model):
+class Recruit(models.Model):
     name = models.CharField(max_length=200)
     email = models.EmailField(max_length=50, unique=True)
     notes = models.CharField(max_length=200, blank=True, null=True)
@@ -28,7 +28,7 @@ class Event(models.Model):
     name = models.CharField(max_length=200)
     date = models.DateField()
     notes = models.CharField(max_length=200, blank=True, null=True)
-    students = models.ManyToManyField(Student, null=True, blank=True)
+    students = models.ManyToManyField(Recruit, null=True, blank=True)
     positions = models.ManyToManyField(Position, null=True, blank=True)
 
     def __str__(self):
@@ -52,7 +52,7 @@ class Task(models.Model):
     )
     start_date = models.DateField()
     update_date = models.DateField()
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    student = models.ForeignKey(Recruit, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
