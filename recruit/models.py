@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.html import format_html
 
 
 class Recruit(models.Model):
@@ -33,6 +34,12 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+
+    def form_url(self):
+        return format_html(
+            "<a href='/recruit/checkin/{}' target='_blank'>Open Check-In</a>",
+            self.name.replace(' ', '%20')
+        )
 
 
 class Task(models.Model):

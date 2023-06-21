@@ -54,7 +54,7 @@ def checkin(request, event_name):
             )
             t.save()
         
-        return HttpResponseRedirect('')
+        return HttpResponseRedirect(request.path_info)
 
     context['form'] = form
     return render(request, "recruit/checkin.html", context)

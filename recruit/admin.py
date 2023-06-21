@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from .models import Recruit, Event, Task, Position
 
 
@@ -32,6 +33,7 @@ class StudentAdmin(admin.ModelAdmin):
 
 
 class EventAdmin(admin.ModelAdmin):
+    list_display = ['name', 'form_url']
     inlines = [
         EventPositionsInline,
         EventRecruitsInline,
