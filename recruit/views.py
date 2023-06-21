@@ -9,10 +9,8 @@ def checkin(request):
 
     # create object of form
     form = CandidateCheckinForm(request.POST or None, request.FILES or None)
-    print(request)
     # check if form data is valid
     if form.is_valid():
-        print("Form Valid")
         # save the form data to model
         student = Student.objects.create(name=request.POST.get("name"), email=request.POST.get("email"))
         student.save()
