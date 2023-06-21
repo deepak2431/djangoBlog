@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import CandidateCheckinForm
+from .models import Student
 
 
 def checkin(request):
@@ -11,7 +12,8 @@ def checkin(request):
     # check if form data is valid
     if form.is_valid():
         # save the form data to model
-        form.save()
+        student = Student.objects.create(name=form.name, email=form.email)
+        student.save()
 
     context['form'] = form
     return render(request, "recruit/checkin.html", context)

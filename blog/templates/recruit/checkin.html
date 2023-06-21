@@ -1,12 +1,14 @@
-<!DOCTYPE html>
-{% extends 'blog/base.html' %}
+{% extends "recruit/base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-
-<div class="column is-one-third">
-    <p> please check in </p>
-    {{ form.as_p }}
-</div>
-
+    <div class="content-section">
+        <form>
+        <h1>Enter Information</h1>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 {% endblock content %}
 </html>
