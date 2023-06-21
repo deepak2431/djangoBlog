@@ -31,6 +31,7 @@ DEBUG = True
 
 INSTALLED_APPS = [
     'tinymce',
+    'recruit.apps.RecruitConfig',
     'blog.apps.BlogConfig',
     'user.apps.UserConfig',
     'crispy_forms',
