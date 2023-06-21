@@ -24,11 +24,8 @@ def checkin(request, event_name):
         # save the form data to model
         name = request.POST.get("name")
         email = request.POST.get("email")
-        student = Recruit.objects.get(email=email)
-        if student is not None:
-            student.name = name
-        else:
-            student = Recruit.objects.create(name=name, email=email)
+        student = Recruit.objects.get_or_create(email=email)[0]
+        student.name = name
         student.save()
 
         # Add student to the event if there is an event with the name in the URL
