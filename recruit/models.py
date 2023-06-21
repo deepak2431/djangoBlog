@@ -15,11 +15,21 @@ class Student(models.Model):
         return self.name
 
 
+class Position(models.Model):
+    name = models.CharField(max_length=48)
+    url = models.CharField(max_length=200)
+    available = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Event(models.Model):
     name = models.CharField(max_length=200)
     date = models.DateField()
     notes = models.CharField(max_length=200, blank=True, null=True)
     students = models.ManyToManyField(Student, null=True, blank=True)
+    positions = models.ManyToManyField(Position, null=True, blank=True)
 
     def __str__(self):
         return self.name
