@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="content-section">
-        <form>
+        <form method="POST">
         <h1>Enter Information</h1>
         {% csrf_token %}
         {{ form|crispy }}
