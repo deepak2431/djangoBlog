@@ -1,4 +1,5 @@
 from django.urls import path, include
+from django.views.generic.base import RedirectView
 from .views import (PostListView,
                     PostDeleteView,
                     PostDetailView,
@@ -10,7 +11,7 @@ from .import views
 
 
 urlpatterns = [
-    path('', PostListView.as_view(), name='blog-home'),
+    path('', RedirectView.as_view(url='/admin', permanent=False)),
     path('questions/form/', PostListView.as_view(), name='question-home', kwargs={'url':'question_form'}),
     path('user/<str:username>/', UserPostListView.as_view(), name='user-posts'),
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
