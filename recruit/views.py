@@ -12,7 +12,7 @@ def checkin(request):
     # check if form data is valid
     if form.is_valid():
         # save the form data to model
-        student = Student.objects.create(name=form.name, email=form.email)
+        student = Student.objects.create(name=request.POST.get("name"), email=request.POST.get("email"))
         student.save()
 
     context['form'] = form
