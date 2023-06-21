@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from datetime import date
 from .forms import CandidateCheckinForm
 from .models import Recruit, Task, Event
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 
 def checkin(request, event_name):
@@ -50,6 +50,8 @@ def checkin(request, event_name):
                 update_date=date.today(),
             )
             t.save()
+        
+        return HttpResponseRedirect('')
 
     context['form'] = form
     return render(request, "recruit/checkin.html", context)
