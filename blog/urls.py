@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import (PostListView,
                     PostDeleteView,
                     PostDetailView,
@@ -7,6 +7,7 @@ from .views import (PostListView,
                      PostmarkedView,
                      SavepostView)
 from .import views
+
 
 urlpatterns = [
     path('', PostListView.as_view(), name='blog-home'),
@@ -22,4 +23,5 @@ urlpatterns = [
     path('bookmarks/',PostmarkedView.as_view() , name='blog-save'),
     path('post/<int:pk>/like/',LikepostView.as_view() ,name='post-like'),
     path('post/<int:pk>/save/',SavepostView.as_view() ,name='post-save'),
+    path('recruit/', include('recruit.urls'))
 ]
