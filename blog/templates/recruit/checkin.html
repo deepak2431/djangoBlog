@@ -7,17 +7,17 @@
 
 
 {% block content %}
-
-
     <div class="container-md">
         <img src="{% static 'svgs/logo-certara.svg' %}" >
         <div class="card mb-10">
             <div class="card-body">
+              <form method="POST">
                 <h1>Enter Information</h1>
                 {% csrf_token %}
                 {{ form|crispy }}
                 <h6>* required fields</h6>
                 <button type="submit" class="btn btn-brand">Submit</button>
+                </form>
             </div>
         </div>
     </div>
