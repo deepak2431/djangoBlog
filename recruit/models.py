@@ -23,3 +23,29 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Task(models.Model):
+    INCOMPLETE = 'INCOMPLETE'
+    IN_PROGRESS = 'IN_PROGRESS'
+    COMPLETED = 'COMPLETED'
+    STATUS_CHOICES = [
+        (INCOMPLETE, 'Incomplete'),
+        (IN_PROGRESS, 'In Progress'),
+        (COMPLETED, 'Completed')
+    ]
+    name = models.CharField(max_length=200)
+    status = models.CharField(
+        max_length=16,
+        choices=STATUS_CHOICES,
+        default=INCOMPLETE
+    )
+    start_date = models.DateField()
+    update_date = models.DateField()
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    def is_completed(self):
+        return self.status == self.COMPLETED
